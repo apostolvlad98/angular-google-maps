@@ -17,12 +17,16 @@ describe('GeocoderService', () => {
     geocoderConstructs = 0;
     geocodeMock = jest.fn();
 
-    (window as any).google.maps.Geocoder = class Geocoder {
-      geocode: jest.Mock = geocodeMock;
+    (window as any).google = {
+      maps: {
+        Geocoder: class Geocoder {
+          geocode: jest.Mock = geocodeMock;
 
-      constructor() {
-        geocoderConstructs += 1;
-      }
+          constructor() {
+            geocoderConstructs += 1;
+          }
+        },
+      },
     };
 
     TestBed.configureTestingModule({
@@ -32,7 +36,7 @@ describe('GeocoderService', () => {
       ],
     });
 
-    geocoderService = TestBed.inject(AgmGeocoder);
+    geocoderService = TestBed.get(AgmGeocoder);
     tick();
   }));
 

@@ -1,12 +1,19 @@
 import { NgZone } from '@angular/core';
-import { fakeAsync, flushMicrotasks, inject, TestBed, tick } from '@angular/core/testing';
+import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
 import { AgmCircle } from '../../directives/circle';
+import { Circle, CircleOptions } from '../google-maps-types';
 import { GoogleMapsAPIWrapper } from './../google-maps-api-wrapper';
 import { CircleManager } from './circle-manager';
 
 describe('CircleManager', () => {
   beforeEach(() => {
+    (window as any).google = {
+      maps: {
+        StrokePosition: {CENTER: 1, INSIDE: 0, OUTSIDE: 2},
+      },
+    };
+
     TestBed.configureTestingModule({
       providers: [
         {
@@ -16,17 +23,14 @@ describe('CircleManager', () => {
         CircleManager,
         {
           provide: GoogleMapsAPIWrapper,
-          useValue: {
-            createCircle: jest.fn(),
-            getNativeMap: jest.fn().mockReturnValue(Promise.resolve()),
-          },
+          useValue: { createCircle: jest.fn() },
         },
       ],
     });
   });
 
   describe('Create a new circle', () => {
-    it('should call the mapsApiWrapper when creating a new circle', fakeAsync(inject(
+    it('should call the mapsApiWrapper when creating a new circle', inject(
       [CircleManager, GoogleMapsAPIWrapper],
       (
         circleManager: CircleManager,
@@ -37,8 +41,6 @@ describe('CircleManager', () => {
         newCircle.latitude = 32.1;
         newCircle.longitude = 11.612;
         circleManager.addCircle(newCircle);
-
-        flushMicrotasks();
 
         expect(apiWrapper.createCircle).toHaveBeenCalledWith({
           center: {
@@ -53,16 +55,16 @@ describe('CircleManager', () => {
           fillOpacity: undefined,
           strokeColor: undefined,
           strokeOpacity: undefined,
-          strokePosition: 0,
+          strokePosition: 'CENTER',
           strokeWeight: 0,
           visible: true,
           zIndex: undefined,
         });
       },
-    )));
+    ));
   });
   describe('Delete a circle', () => {
-    it('should set the map to null when deleting a existing circle', fakeAsync(inject(
+    it('should set the map to null when deleting a existing circle', inject(
       [CircleManager, GoogleMapsAPIWrapper],
       (
         circleManager: CircleManager,
@@ -82,12 +84,11 @@ describe('CircleManager', () => {
         );
 
         circleManager.addCircle(newCircle);
-        flushMicrotasks();
         circleManager.removeCircle(newCircle).then(() => {
           expect(circleInstance.setMap).toHaveBeenCalledWith(null);
         });
       },
-    )));
+    ));
   });
 
   describe('Set radius option', () => {
@@ -103,7 +104,7 @@ describe('CircleManager', () => {
           newCircle.latitude = 32.1;
           newCircle.longitude = 11.612;
 
-          const circleInstance: google.maps.Circle = {
+          const circleInstance: Circle = {
             setMap: jest.fn(),
             setRadius: jest.fn(),
           } as any;
@@ -111,12 +112,10 @@ describe('CircleManager', () => {
             Promise.resolve(circleInstance),
           );
           circleManager.addCircle(newCircle);
-          flushMicrotasks();
-
           newCircle.radius = 600;
-          circleManager.setRadius(newCircle);
-          flushMicrotasks();
 
+          circleManager.setRadius(newCircle);
+          tick();
           expect(circleInstance.setRadius).toHaveBeenCalledWith(600);
         },
       ),
@@ -138,7 +137,7 @@ describe('CircleManager', () => {
           newCircle.fillOpacity = 0.4;
           newCircle.strokeOpacity = 0.4;
 
-          const circleInstance = {
+          const circleInstance: any = {
             setMap: jest.fn(),
             setOptions: jest.fn(),
           };
@@ -148,7 +147,6 @@ describe('CircleManager', () => {
           );
 
           circleManager.addCircle(newCircle);
-          flushMicrotasks();
 
           newCircle.fillOpacity = 0.6;
           newCircle.strokeOpacity = 0.6;
@@ -188,8 +186,6 @@ describe('CircleManager', () => {
             Promise.resolve(circleInstance));
 
           circleManager.addCircle(newCircle);
-          flushMicrotasks();
-
           newCircle.fillColor = '#00008B';
           newCircle.strokeColor = '#00008B';
 
@@ -199,7 +195,7 @@ describe('CircleManager', () => {
           };
 
           circleManager.setOptions(newCircle, options);
-          flushMicrotasks();
+          tick();
           expect(circleInstance.setOptions).toHaveBeenCalledWith(options);
         },
       ),
@@ -228,12 +224,11 @@ describe('CircleManager', () => {
             Promise.resolve(circleInstance));
 
           circleManager.addCircle(newCircle);
-          flushMicrotasks();
 
           const options = {
             strokeWeight: 2,
             strokePosition: 'OUTSIDE',
-          } as any as google.maps.CircleOptions;
+          } as CircleOptions;
 
           circleManager.setOptions(newCircle, options);
           tick();
@@ -266,7 +261,6 @@ describe('CircleManager', () => {
             Promise.resolve(circleInstance),
           );
           circleManager.addCircle(newCircle);
-          flushMicrotasks();
 
           newCircle.visible = true;
           circleManager.setVisible(newCircle);

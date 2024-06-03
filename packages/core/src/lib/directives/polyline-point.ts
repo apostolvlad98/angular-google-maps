@@ -2,6 +2,7 @@ import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleCh
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FitBoundsAccessor, FitBoundsDetails } from '../services/fit-bounds';
+import { LatLngLiteral } from '../services/google-maps-types';
 
 /**
  * AgmPolylinePoint represents one element of a polyline within a  {@link
@@ -27,19 +28,18 @@ export class AgmPolylinePoint implements OnChanges, FitBoundsAccessor {
   /**
    * This event emitter gets emitted when the position of the point changed.
    */
-  @Output() positionChanged: EventEmitter<google.maps.LatLngLiteral> = new EventEmitter<google.maps.LatLngLiteral>();
+  @Output() positionChanged: EventEmitter<LatLngLiteral> = new EventEmitter<LatLngLiteral>();
 
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): any {
-    // tslint:disable: no-string-literal
     if (changes['latitude'] || changes['longitude']) {
-      this.positionChanged.emit({
+      const position: LatLngLiteral = {
         lat: changes['latitude'] ? changes['latitude'].currentValue : this.latitude,
         lng: changes['longitude'] ? changes['longitude'].currentValue : this.longitude,
-      });
+      } as LatLngLiteral;
+      this.positionChanged.emit(position);
     }
-    // tslint:enable: no-string-literal
   }
 
   /** @internal */

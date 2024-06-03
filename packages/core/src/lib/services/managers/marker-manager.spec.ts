@@ -6,6 +6,19 @@ import { GoogleMapsAPIWrapper } from './../google-maps-api-wrapper';
 import { MarkerManager } from './../managers/marker-manager';
 
 describe('MarkerManager', () => {
+  const animMap = {
+    BOUNCE: 1,
+    DROP: 2,
+  };
+
+  beforeAll(() => {
+    (window as any).google = {
+      maps: {
+        Animation: animMap,
+      },
+    };
+  });
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -254,7 +267,7 @@ describe('MarkerManager', () => {
              const updatePromise = markerManager.updateAnimation(newMarker);
              tick(600);
              updatePromise.then(
-                 () => expect(markerInstance.setAnimation).toHaveBeenCalledWith(1));
+                 () => expect(markerInstance.setAnimation).toHaveBeenCalledWith(animMap.BOUNCE));
            })));
   });
 });

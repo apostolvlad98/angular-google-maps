@@ -1,7 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
+import * as mapTypes from './google-maps-types';
+import { Polyline, PolylineOptions } from './google-maps-types';
 import { MapsAPILoader } from './maps-api-loader/maps-api-loader';
+
+// todo: add types for this
+declare var google: any;
 
 /**
  * Wrapper class that handles the communication with the Google Maps Javascript
@@ -9,37 +14,37 @@ import { MapsAPILoader } from './maps-api-loader/maps-api-loader';
  */
 @Injectable()
 export class GoogleMapsAPIWrapper {
-  private _map: Promise<google.maps.Map>;
-  private _mapResolver: (value?: google.maps.Map) => void;
+  private _map: Promise<mapTypes.GoogleMap>;
+  private _mapResolver: (value?: mapTypes.GoogleMap) => void;
 
   constructor(private _loader: MapsAPILoader, private _zone: NgZone) {
     this._map =
-        new Promise<google.maps.Map>((resolve: (value: google.maps.Map) => void) => { this._mapResolver = resolve; });
+        new Promise<mapTypes.GoogleMap>((resolve: () => void) => { this._mapResolver = resolve; });
   }
 
-  createMap(el: HTMLElement, mapOptions: google.maps.MapOptions): Promise<void> {
+  createMap(el: HTMLElement, mapOptions: mapTypes.MapOptions): Promise<void> {
     return this._zone.runOutsideAngular(() => {
       return this._loader.load().then(() => {
         const map = new google.maps.Map(el, mapOptions);
-        this._mapResolver(map);
+        this._mapResolver(map as mapTypes.GoogleMap);
         return;
       });
     });
   }
 
-  setMapOptions(options: google.maps.MapOptions) {
+  setMapOptions(options: mapTypes.MapOptions) {
     return this._zone.runOutsideAngular(() => {
-      this._map.then((m: google.maps.Map) => { m.setOptions(options); });
+      this._map.then((m: mapTypes.GoogleMap) => { m.setOptions(options); });
     });
   }
 
   /**
    * Creates a google map marker with the map context
    */
-  createMarker(options: google.maps.MarkerOptions = {}, addToMap: boolean = true):
-      Promise<google.maps.Marker> {
+  createMarker(options: mapTypes.MarkerOptions = {} as mapTypes.MarkerOptions, addToMap: boolean = true):
+      Promise<mapTypes.Marker> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => {
+      return this._map.then((map: mapTypes.GoogleMap) => {
         if (addToMap) {
           options.map = map;
         }
@@ -48,18 +53,21 @@ export class GoogleMapsAPIWrapper {
     });
   }
 
-  createInfoWindow(options?: google.maps.InfoWindowOptions): Promise<google.maps.InfoWindow> {
+  createInfoWindow(options?: mapTypes.InfoWindowOptions): Promise<mapTypes.InfoWindow> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then(() => new google.maps.InfoWindow(options));
+      return this._map.then(() => { return new google.maps.InfoWindow(options); });
     });
   }
 
   /**
    * Creates a google.map.Circle for the current map.
    */
-  createCircle(options: google.maps.CircleOptions): Promise<google.maps.Circle> {
+  createCircle(options: mapTypes.CircleOptions): Promise<mapTypes.Circle> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => {
+      return this._map.then((map: mapTypes.GoogleMap) => {
+        if (typeof options.strokePosition === 'string') {
+          options.strokePosition = google.maps.StrokePosition[options.strokePosition];
+        }
         options.map = map;
         return new google.maps.Circle(options);
       });
@@ -69,29 +77,29 @@ export class GoogleMapsAPIWrapper {
   /**
    * Creates a google.map.Rectangle for the current map.
    */
-  createRectangle(options: google.maps.RectangleOptions): Promise<google.maps.Rectangle> {
+  createRectangle(options: mapTypes.RectangleOptions): Promise<mapTypes.Rectangle> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => {
+      return this._map.then((map: mapTypes.GoogleMap) => {
         options.map = map;
         return new google.maps.Rectangle(options);
       });
     });
   }
 
-  createPolyline(options: google.maps.PolylineOptions): Promise<google.maps.Polyline> {
+  createPolyline(options: PolylineOptions): Promise<Polyline> {
     return this._zone.runOutsideAngular(() => {
-      return this.getNativeMap().then((map: google.maps.Map) => {
-        const line = new google.maps.Polyline(options);
+      return this.getNativeMap().then((map: mapTypes.GoogleMap) => {
+        let line = new google.maps.Polyline(options);
         line.setMap(map);
         return line;
       });
     });
   }
 
-  createPolygon(options: google.maps.PolygonOptions): Promise<google.maps.Polygon> {
+  createPolygon(options: mapTypes.PolygonOptions): Promise<mapTypes.Polygon> {
     return this._zone.runOutsideAngular(() => {
-      return this.getNativeMap().then((map: google.maps.Map) => {
-        const polygon = new google.maps.Polygon(options);
+      return this.getNativeMap().then((map: mapTypes.GoogleMap) => {
+        let polygon = new google.maps.Polygon(options);
         polygon.setMap(map);
         return polygon;
       });
@@ -101,10 +109,10 @@ export class GoogleMapsAPIWrapper {
   /**
    * Creates a new google.map.Data layer for the current map
    */
-  createDataLayer(options?: google.maps.Data.DataOptions): Promise<google.maps.Data> {
+  createDataLayer(options?: mapTypes.DataOptions): Promise<mapTypes.Data> {
     return this._zone.runOutsideAngular(() => {
       return this._map.then(m => {
-        const data = new google.maps.Data(options);
+        let data = new google.maps.Data(options);
         data.setMap(m);
         return data;
       });
@@ -113,13 +121,14 @@ export class GoogleMapsAPIWrapper {
 
   /**
    * Creates a TransitLayer instance for a map
-   * @returns a new transit layer object
+   * @param {TransitLayerOptions} options - used for setting layer options
+   * @returns {Promise<TransitLayer>} a new transit layer object
    */
-  createTransitLayer(): Promise<google.maps.TransitLayer>{
+  createTransitLayer(options: mapTypes.TransitLayerOptions): Promise<mapTypes.TransitLayer>{
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => {
-        const newLayer: google.maps.TransitLayer = new google.maps.TransitLayer();
-        newLayer.setMap(map);
+      return this._map.then((map: mapTypes.GoogleMap) => {
+        let newLayer: mapTypes.TransitLayer = new google.maps.TransitLayer();
+        newLayer.setMap(options.visible ? map : null);
         return newLayer;
       });
     });
@@ -127,13 +136,14 @@ export class GoogleMapsAPIWrapper {
 
   /**
    * Creates a BicyclingLayer instance for a map
-   * @returns a new bicycling layer object
+   * @param {BicyclingLayerOptions} options - used for setting layer options
+   * @returns {Promise<BicyclingLayer>} a new bicycling layer object
    */
-  createBicyclingLayer(): Promise<google.maps.BicyclingLayer>{
+  createBicyclingLayer(options: mapTypes.BicyclingLayerOptions): Promise<mapTypes.BicyclingLayer>{
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => {
-        const newLayer: google.maps.BicyclingLayer = new google.maps.BicyclingLayer();
-        newLayer.setMap(map);
+      return this._map.then((map: mapTypes.GoogleMap) => {
+        let newLayer: mapTypes.BicyclingLayer = new google.maps.BicyclingLayer();
+        newLayer.setMap(options.visible ? map : null);
         return newLayer;
       });
     });
@@ -142,64 +152,63 @@ export class GoogleMapsAPIWrapper {
   /**
    * Determines if given coordinates are insite a Polygon path.
    */
-  containsLocation(latLng: google.maps.LatLng, polygon: google.maps.Polygon): Promise<boolean> {
-    return this._map.then(() => google.maps.geometry.poly.containsLocation(latLng, polygon));
+  containsLocation(latLng: mapTypes.LatLngLiteral, polygon: mapTypes.Polygon): Promise<boolean> {
+    return google.maps.geometry.poly.containsLocation(latLng, polygon);
   }
 
-  subscribeToMapEvent<N extends keyof google.maps.MapHandlerMap>(eventName: N)
-      : Observable<google.maps.MapHandlerMap[N]> {
-    return new Observable((observer) => {
-      this._map.then(m =>
-        m.addListener(eventName, (...evArgs) => this._zone.run(() => observer.next(evArgs)))
-      );
+  subscribeToMapEvent<E>(eventName: string): Observable<E> {
+    return new Observable((observer: Observer<E>) => {
+      this._map.then((m: mapTypes.GoogleMap) => {
+        m.addListener(eventName, (arg: E) => { this._zone.run(() => observer.next(arg)); });
+      });
     });
   }
 
   clearInstanceListeners() {
     return this._zone.runOutsideAngular(() => {
-      this._map.then((map: google.maps.Map) => {
+      this._map.then((map: mapTypes.GoogleMap) => {
         google.maps.event.clearInstanceListeners(map);
       });
     });
   }
 
-  setCenter(latLng: google.maps.LatLngLiteral): Promise<void> {
+  setCenter(latLng: mapTypes.LatLngLiteral): Promise<void> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.setCenter(latLng));
+      return this._map.then((map: mapTypes.GoogleMap) => map.setCenter(latLng));
     });
   }
 
   getZoom(): Promise<number> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.getZoom());
+      return this._map.then((map: mapTypes.GoogleMap) => map.getZoom());
     });
   }
 
-  getBounds(): Promise<google.maps.LatLngBounds> {
+  getBounds(): Promise<mapTypes.LatLngBounds> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.getBounds());
+      return this._map.then((map: mapTypes.GoogleMap) => map.getBounds());
     });
   }
 
-  getMapTypeId(): Promise<google.maps.MapTypeId> {
+  getMapTypeId(): Promise<mapTypes.MapTypeId> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.getMapTypeId());
+      return this._map.then((map: mapTypes.GoogleMap) => map.getMapTypeId());
     });
   }
 
   setZoom(zoom: number): Promise<void> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.setZoom(zoom));
+      return this._map.then((map: mapTypes.GoogleMap) => map.setZoom(zoom));
     });
   }
 
-  getCenter(): Promise<google.maps.LatLng> {
+  getCenter(): Promise<mapTypes.LatLng> {
     return this._zone.runOutsideAngular(() => {
-      return this._map.then((map: google.maps.Map) => map.getCenter());
+      return this._map.then((map: mapTypes.GoogleMap) => map.getCenter());
     });
   }
 
-  panTo(latLng: google.maps.LatLng | google.maps.LatLngLiteral): Promise<void> {
+  panTo(latLng: mapTypes.LatLng | mapTypes.LatLngLiteral): Promise<void> {
     return this._zone.runOutsideAngular(() => {
       return this._map.then((map) => map.panTo(latLng));
     });
@@ -211,13 +220,13 @@ export class GoogleMapsAPIWrapper {
     });
   }
 
-  fitBounds(latLng: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral, padding?: number | google.maps.Padding): Promise<void> {
+  fitBounds(latLng: mapTypes.LatLngBounds | mapTypes.LatLngBoundsLiteral, padding?: number | mapTypes.Padding): Promise<void> {
     return this._zone.runOutsideAngular(() => {
       return this._map.then((map) => map.fitBounds(latLng, padding));
     });
   }
 
-  panToBounds(latLng: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral, padding?: number | google.maps.Padding): Promise<void> {
+  panToBounds(latLng: mapTypes.LatLngBounds | mapTypes.LatLngBoundsLiteral, padding?: number | mapTypes.Padding): Promise<void> {
     return this._zone.runOutsideAngular(() => {
       return this._map.then((map) => map.panToBounds(latLng, padding));
     });
@@ -226,7 +235,7 @@ export class GoogleMapsAPIWrapper {
   /**
    * Returns the native Google Maps Map instance. Be careful when using this instance directly.
    */
-  getNativeMap(): Promise<google.maps.Map> { return this._map; }
+  getNativeMap(): Promise<mapTypes.GoogleMap> { return this._map; }
 
   /**
    * Triggers the given event name on the map instance.

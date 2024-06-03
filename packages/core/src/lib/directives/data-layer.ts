@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { DataMouseEvent, DataOptions } from './../services/google-maps-types';
 import { DataLayerManager } from './../services/managers/data-layer-manager';
 
 let layerId = 0;
@@ -199,7 +200,7 @@ let layerId = 0;
   selector: 'agm-data-layer',
 })
 export class AgmDataLayer implements OnInit, OnDestroy, OnChanges {
-  private static _dataOptionsAttributes = ['style'];
+  private static _dataOptionsAttributes: Array<string> = ['style'];
 
   private _addedToManager = false;
   private _id: string = (layerId++).toString();
@@ -208,17 +209,17 @@ export class AgmDataLayer implements OnInit, OnDestroy, OnChanges {
   /**
    * This event is fired when a feature in the layer is clicked.
    */
-  @Output() layerClick: EventEmitter<google.maps.Data.MouseEvent> = new EventEmitter<google.maps.Data.MouseEvent>();
+  @Output() layerClick: EventEmitter<DataMouseEvent> = new EventEmitter<DataMouseEvent>();
 
   /**
    * The geoJson to be displayed
    */
-  @Input() geoJson: object | string | null = null;
+  @Input() geoJson: Object | string | null = null;
 
   /**
    * The layer's style function.
    */
-  @Input() style: (param: google.maps.Data.Feature) => google.maps.Data.StyleOptions;
+  @Input() style: () => void;
 
   constructor(private _manager: DataLayerManager) { }
 
@@ -233,7 +234,7 @@ export class AgmDataLayer implements OnInit, OnDestroy, OnChanges {
 
   private _addEventListeners() {
     const listeners = [
-      { name: 'click', handler: (ev: google.maps.Data.MouseEvent) => this.layerClick.emit(ev) },
+      { name: 'click', handler: (ev: DataMouseEvent) => this.layerClick.emit(ev) },
     ];
     listeners.forEach((obj) => {
       const os = this._manager.createEventObservable(obj.name, this).subscribe(obj.handler);
@@ -260,14 +261,14 @@ export class AgmDataLayer implements OnInit, OnDestroy, OnChanges {
       return;
     }
 
-    // tslint:disable-next-line: no-string-literal
-    const geoJsonChange = changes['geoJson'];
+    var geoJsonChange = changes['geoJson'];
     if (geoJsonChange) {
       this._manager.updateGeoJson(this, geoJsonChange.currentValue);
     }
 
-    const dataOptions = AgmDataLayer._dataOptionsAttributes.reduce<google.maps.Data.DataOptions>((options, k) =>
-      options[k] = changes.hasOwnProperty(k) ? changes[k].currentValue : (this as any)[k], {});
+    let dataOptions: DataOptions = {};
+
+    AgmDataLayer._dataOptionsAttributes.forEach(k => (dataOptions as any)[k] = changes.hasOwnProperty(k) ? changes[k].currentValue : (this as any)[k]);
 
     this._manager.setDataOptions(this, dataOptions);
   }

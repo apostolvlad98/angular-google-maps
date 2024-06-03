@@ -6,7 +6,7 @@ import { AgmDataLayer } from './directives/data-layer';
 import { AgmFitBounds } from './directives/fit-bounds';
 import { AgmInfoWindow } from './directives/info-window';
 import { AgmKmlLayer } from './directives/kml-layer';
-import { AgmFullscreenControl, AgmMap, AgmMapTypeControl, AgmPanControl, AgmRotateControl, AgmScaleControl, AgmStreetViewControl, AgmZoomControl } from './directives/map';
+import { AgmMap } from './directives/map';
 import { AgmMarker } from './directives/marker';
 import { AgmPolygon } from './directives/polygon';
 import { AgmPolyline } from './directives/polyline';
@@ -15,7 +15,7 @@ import { AgmPolylinePoint } from './directives/polyline-point';
 import { AgmRectangle } from './directives/rectangle';
 import { AgmTransitLayer } from './directives/transit-layer';
 
-import { LazyMapsAPILoader, LazyMapsAPILoaderConfigLiteral, LAZY_MAPS_API_CONFIG } from './services/maps-api-loader/lazy-maps-api-loader';
+import { LAZY_MAPS_API_CONFIG, LazyMapsAPILoader, LazyMapsAPILoaderConfigLiteral } from './services/maps-api-loader/lazy-maps-api-loader';
 import { MapsAPILoader } from './services/maps-api-loader/maps-api-loader';
 
 import { BROWSER_GLOBALS_PROVIDERS } from './utils/browser-globals';
@@ -29,26 +29,18 @@ export function coreDirectives() {
     AgmCircle,
     AgmDataLayer,
     AgmFitBounds,
-    AgmFullscreenControl,
     AgmInfoWindow,
     AgmKmlLayer,
     AgmMap,
-    AgmMapTypeControl,
     AgmMarker,
-    AgmPanControl,
     AgmPolygon,
     AgmPolyline,
     AgmPolylineIcon,
     AgmPolylinePoint,
     AgmRectangle,
-    AgmRotateControl,
-    AgmScaleControl,
-    AgmStreetViewControl,
     AgmTransitLayer,
-    AgmZoomControl,
   ];
 }
-
 /**
  * The angular-google-maps core module. Contains all Directives/Services/Pipes
  * of the core module. Please use `AgmCoreModule.forRoot()` in your app module.

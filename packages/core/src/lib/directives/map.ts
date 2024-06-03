@@ -1,9 +1,15 @@
 import { isPlatformServer } from '@angular/common';
-import { AfterContentInit, Component, ContentChildren, Directive, ElementRef, EventEmitter, Inject, Input, NgZone, OnChanges, OnDestroy, Output, PLATFORM_ID, QueryList, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { MouseEvent } from '../map-types';
 import { FitBoundsService } from '../services/fit-bounds';
 import { GoogleMapsAPIWrapper } from '../services/google-maps-api-wrapper';
+import {
+  FullscreenControlOptions, LatLng, LatLngBounds, LatLngBoundsLiteral, LatLngLiteral,
+  MapRestriction, MapTypeControlOptions, MapTypeId, MapTypeStyle, Padding, PanControlOptions,
+  RotateControlOptions, ScaleControlOptions, StreetViewControlOptions, ZoomControlOptions,
+} from '../services/google-maps-types';
 import { CircleManager } from '../services/managers/circle-manager';
 import { InfoWindowManager } from '../services/managers/info-window-manager';
 import { LayerManager } from '../services/managers/layer-manager';
@@ -14,121 +20,7 @@ import { RectangleManager } from '../services/managers/rectangle-manager';
 import { DataLayerManager } from './../services/managers/data-layer-manager';
 import { KmlLayerManager } from './../services/managers/kml-layer-manager';
 
-export type ControlPosition = keyof typeof google.maps.ControlPosition;
-
-@Directive()
-export abstract class AgmMapControl {
-  @Input() position: ControlPosition;
-  abstract getOptions(): Partial<google.maps.MapOptions>;
-}
-
-@Directive({
-  selector: 'agm-map agm-fullscreen-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmFullscreenControl }],
-})
-export class AgmFullscreenControl extends AgmMapControl {
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      fullscreenControl: true,
-      fullscreenControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-      },
-    };
-  }
-}
-@Directive({
-  selector: 'agm-map agm-map-type-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmMapTypeControl }],
-})
-export class AgmMapTypeControl extends AgmMapControl {
-  @Input() mapTypeIds: (keyof typeof google.maps.MapTypeId)[];
-  @Input() style: keyof typeof google.maps.MapTypeControlStyle;
-
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      mapTypeControl: true,
-      mapTypeControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-        style: this.style && google.maps.MapTypeControlStyle[this.style],
-        mapTypeIds: this.mapTypeIds && this.mapTypeIds.map(mapTypeId => google.maps.MapTypeId[mapTypeId]),
-      },
-    };
-  }
-}
-
-@Directive({
-  selector: 'agm-map agm-pan-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmPanControl }],
-})
-export class AgmPanControl extends AgmMapControl {
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      panControl: true,
-      panControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-      },
-    };
-  }
-}
-
-@Directive({
-  selector: 'agm-map agm-rotate-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmRotateControl }],
-})
-export class AgmRotateControl extends AgmMapControl {
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      rotateControl: true,
-      rotateControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-      },
-    };
-  }
-}
-
-@Directive({
-  selector: 'agm-map agm-scale-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmScaleControl }],
-})
-export class AgmScaleControl extends AgmMapControl{
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      scaleControl: true,
-    };
-  }
-}
-
-@Directive({
-  selector: 'agm-map agm-street-view-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmStreetViewControl }],
-})
-export class AgmStreetViewControl extends AgmMapControl {
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      streetViewControl: true,
-      streetViewControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-      },
-    };
-  }
-}
-
-@Directive({
-  selector: 'agm-map agm-zoom-control',
-  providers: [{ provide: AgmMapControl, useExisting: AgmZoomControl }],
-})
-export class AgmZoomControl extends AgmMapControl{
-  @Input() style: keyof typeof google.maps.ZoomControlStyle;
-  getOptions(): Partial<google.maps.MapOptions> {
-    return {
-      zoomControl: true,
-      zoomControlOptions: {
-        position: this.position && google.maps.ControlPosition[this.position],
-        style: this.style && google.maps.ZoomControlStyle[this.style],
-      },
-    };
-  }
-}
+declare var google: any;
 
 /**
  * AgmMap renders a Google Map.
@@ -169,6 +61,10 @@ export class AgmZoomControl extends AgmMapControl{
     PolylineManager,
     RectangleManager,
   ],
+  host: {
+    // todo: deprecated - we will remove it with the next version
+    '[class.sebm-google-map-container]': 'true',
+  },
   styles: [`
     .agm-map-container-inner {
       width: inherit;
@@ -185,7 +81,7 @@ export class AgmZoomControl extends AgmMapControl{
               </div>
   `,
 })
-export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
+export class AgmMap implements OnChanges, OnInit, OnDestroy {
   /**
    * The longitude that defines the center of the map.
    */
@@ -269,10 +165,20 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   @Input() keyboardShortcuts = true;
 
   /**
+   * The enabled/disabled state of the Zoom control.
+   */
+  @Input() zoomControl: boolean;
+
+  /**
+   * Options for the Zoom control.
+   */
+  @Input() zoomControlOptions: ZoomControlOptions;
+
+  /**
    * Styles to apply to each of the default map types. Note that for Satellite/Hybrid and Terrain
    * modes, these styles will only apply to labels and geometry.
    */
-  @Input() styles: google.maps.MapTypeStyle[] = [];
+  @Input() styles: MapTypeStyle[] = [];
 
   /**
    * When true and the latitude and/or longitude values changes, the Google Maps panTo method is
@@ -282,20 +188,82 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   @Input() usePanning = false;
 
   /**
+   * The initial enabled/disabled state of the Street View Pegman control.
+   * This control is part of the default UI, and should be set to false when displaying a map type
+   * on which the Street View road overlay should not appear (e.g. a non-Earth map type).
+   */
+  @Input() streetViewControl: boolean;
+
+  /**
+   * Options for the Street View control.
+   */
+  @Input() streetViewControlOptions: StreetViewControlOptions;
+
+  /**
    * Sets the viewport to contain the given bounds.
    * If this option to `true`, the bounds get automatically computed from all elements that use the {@link AgmFitBounds} directive.
    */
-  @Input() fitBounds: google.maps.LatLngBoundsLiteral | google.maps.LatLngBounds | boolean = false;
+  @Input() fitBounds: LatLngBoundsLiteral | LatLngBounds | boolean = false;
 
   /**
    * Padding amount for the bounds.
    */
-  @Input() fitBoundsPadding: number | google.maps.Padding;
+  @Input() fitBoundsPadding: number | Padding;
+
+  /**
+   * The initial enabled/disabled state of the Scale control. This is disabled by default.
+   */
+  @Input() scaleControl = false;
+
+  /**
+   * Options for the scale control.
+   */
+  @Input() scaleControlOptions: ScaleControlOptions;
+
+  /**
+   * The initial enabled/disabled state of the Map type control.
+   */
+  @Input() mapTypeControl = false;
+
+  /**
+   * Options for the Map type control.
+   */
+  @Input() mapTypeControlOptions: MapTypeControlOptions;
+
+  /**
+   * The initial enabled/disabled state of the Pan control.
+   */
+  @Input() panControl  = false;
+
+  /**
+   * Options for the Pan control.
+   */
+  @Input() panControlOptions: PanControlOptions;
+
+  /**
+   * The initial enabled/disabled state of the Rotate control.
+   */
+  @Input() rotateControl = false;
+
+  /**
+   * Options for the Rotate control.
+   */
+  @Input() rotateControlOptions: RotateControlOptions;
+
+  /**
+   * The initial enabled/disabled state of the Fullscreen control.
+   */
+  @Input() fullscreenControl  = false;
+
+  /**
+   * Options for the Fullscreen control.
+   */
+  @Input() fullscreenControlOptions: FullscreenControlOptions;
 
   /**
    * The map mapTypeId. Defaults to 'roadmap'.
    */
-  @Input() mapTypeId: keyof typeof google.maps.MapTypeId = 'ROADMAP';
+  @Input() mapTypeId: 'roadmap' | 'hybrid' | 'satellite' | 'terrain' | string = 'roadmap';
 
   /**
    * When false, map icons are not clickable. A map icon represents a point of interest,
@@ -319,7 +287,7 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
    * - 'none'        (The map cannot be panned or zoomed by user gestures.)
    * - 'auto'        [default] (Gesture handling is either cooperative or greedy, depending on whether the page is scrollable or not.
    */
-  @Input() gestureHandling: google.maps.GestureHandlingOptions = 'auto';
+  @Input() gestureHandling: 'cooperative' | 'greedy' | 'none' | 'auto' = 'auto';
 
     /**
      * Controls the automatic switching behavior for the angle of incidence of
@@ -341,15 +309,17 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
    * Options for restricting the bounds of the map.
    * User cannot pan or zoom away from restricted area.
    */
-  @Input() restriction: google.maps.MapRestriction;
-
+  @Input() restriction: MapRestriction;
   /**
    * Map option attributes that can change over time
    */
   private static _mapOptionsAttributes: string[] = [
     'disableDoubleClickZoom', 'scrollwheel', 'draggable', 'draggableCursor', 'draggingCursor',
-    'keyboardShortcuts', 'styles', 'zoom', 'minZoom', 'maxZoom', 'mapTypeId', 'clickableIcons',
-    'gestureHandling', 'tilt', 'restriction',
+    'keyboardShortcuts', 'zoomControl', 'zoomControlOptions', 'styles', 'streetViewControl',
+    'streetViewControlOptions', 'zoom', 'mapTypeControl', 'mapTypeControlOptions', 'minZoom',
+    'maxZoom', 'panControl', 'panControlOptions', 'rotateControl', 'rotateControlOptions',
+    'fullscreenControl', 'fullscreenControlOptions', 'scaleControl', 'scaleControlOptions',
+    'mapTypeId', 'clickableIcons', 'gestureHandling', 'tilt', 'restriction',
   ];
 
   private _observableSubscriptions: Subscription[] = [];
@@ -359,35 +329,34 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
    * This event emitter gets emitted when the user clicks on the map (but not when they click on a
    * marker or infoWindow).
    */
-  // tslint:disable-next-line: max-line-length
-  @Output() mapClick: EventEmitter<google.maps.MouseEvent | google.maps.IconMouseEvent> = new EventEmitter<google.maps.MouseEvent | google.maps.IconMouseEvent>();
+  @Output() mapClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event emitter gets emitted when the user right-clicks on the map (but not when they click
    * on a marker or infoWindow).
    */
-  @Output() mapRightClick: EventEmitter<google.maps.MouseEvent> = new EventEmitter<google.maps.MouseEvent>();
+  @Output() mapRightClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event emitter gets emitted when the user double-clicks on the map (but not when they click
    * on a marker or infoWindow).
    */
-  @Output() mapDblClick: EventEmitter<google.maps.MouseEvent> = new EventEmitter<google.maps.MouseEvent>();
+  @Output() mapDblClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event emitter is fired when the map center changes.
    */
-  @Output() centerChange: EventEmitter<google.maps.LatLngLiteral> = new EventEmitter<google.maps.LatLngLiteral>();
+  @Output() centerChange: EventEmitter<LatLngLiteral> = new EventEmitter<LatLngLiteral>();
 
   /**
    * This event is fired when the viewport bounds have changed.
    */
-  @Output() boundsChange: EventEmitter<google.maps.LatLngBounds> = new EventEmitter<google.maps.LatLngBounds>();
+  @Output() boundsChange: EventEmitter<LatLngBounds> = new EventEmitter<LatLngBounds>();
 
   /**
    * This event is fired when the mapTypeId property changes.
    */
-  @Output() mapTypeIdChange: EventEmitter<google.maps.MapTypeId> = new EventEmitter<google.maps.MapTypeId>();
+  @Output() mapTypeIdChange: EventEmitter<MapTypeId> = new EventEmitter<MapTypeId>();
 
   /**
    * This event is fired when the map becomes idle after panning or zooming.
@@ -410,19 +379,16 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
    */
   @Output() tilesLoaded: EventEmitter<void> = new EventEmitter<void>();
 
-  @ContentChildren(AgmMapControl) mapControls: QueryList<AgmMapControl>;
-
   constructor(
     private _elem: ElementRef,
     private _mapsWrapper: GoogleMapsAPIWrapper,
-    // tslint:disable-next-line: ban-types
     @Inject(PLATFORM_ID) private _platformId: Object,
     protected _fitBoundsService: FitBoundsService,
     private _zone: NgZone
   ) {}
 
   /** @internal */
-  ngAfterContentInit() {
+  ngOnInit() {
     if (isPlatformServer(this._platformId)) {
       // The code is running on the server, do nothing
       return;
@@ -448,7 +414,21 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
       draggingCursor: this.draggingCursor,
       keyboardShortcuts: this.keyboardShortcuts,
       styles: this.styles,
-      mapTypeId: this.mapTypeId.toLocaleLowerCase(),
+      zoomControl: this.zoomControl,
+      zoomControlOptions: this.zoomControlOptions,
+      streetViewControl: this.streetViewControl,
+      streetViewControlOptions: this.streetViewControlOptions,
+      scaleControl: this.scaleControl,
+      scaleControlOptions: this.scaleControlOptions,
+      mapTypeControl: this.mapTypeControl,
+      mapTypeControlOptions: this.mapTypeControlOptions,
+      panControl: this.panControl,
+      panControlOptions: this.panControlOptions,
+      rotateControl: this.rotateControl,
+      rotateControlOptions: this.rotateControlOptions,
+      fullscreenControl: this.fullscreenControl,
+      fullscreenControlOptions: this.fullscreenControlOptions,
+      mapTypeId: this.mapTypeId,
       clickableIcons: this.clickableIcons,
       gestureHandling: this.gestureHandling,
       tilt: this.tilt,
@@ -465,7 +445,6 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
     this._handleMapTypeIdChange();
     this._handleTilesLoadedEvent();
     this._handleIdleEvent();
-    this._handleControlChange();
   }
 
   /** @internal */
@@ -487,8 +466,8 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private _updateMapOptionsChanges(changes: SimpleChanges) {
-    const options: {[propName: string]: any} = {};
-    const optionKeys =
+    let options: {[propName: string]: any} = {};
+    let optionKeys =
       Object.keys(changes).filter(k => AgmMap._mapOptionsAttributes.indexOf(k) !== -1);
     optionKeys.forEach((k) => { options[k] = changes[k].currentValue; });
     this._mapsWrapper.setMapOptions(options);
@@ -516,13 +495,11 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private _updatePosition(changes: SimpleChanges) {
-    // tslint:disable: no-string-literal
     if (changes['latitude'] == null && changes['longitude'] == null &&
         !changes['fitBounds']) {
       // no position update needed
       return;
     }
-    // tslint:enable: no-string-literal
 
     // we prefer fitBounds in changes
     if ('fitBounds' in changes) {
@@ -537,7 +514,7 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private _setCenter() {
-    const newCenter = {
+    let newCenter = {
       lat: this.latitude,
       lng: this.longitude,
     };
@@ -574,7 +551,7 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
     });
   }
 
-  protected _updateBounds(bounds: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral, padding?: number | google.maps.Padding) {
+  protected _updateBounds(bounds: LatLngBounds | LatLngBoundsLiteral, padding?: number | Padding) {
     if (!bounds) {
       return;
     }
@@ -590,39 +567,39 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
     this._mapsWrapper.fitBounds(bounds, padding);
   }
 
-  private _isLatLngBoundsLiteral(bounds: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral): boolean {
+  private _isLatLngBoundsLiteral(bounds: LatLngBounds | LatLngBoundsLiteral): bounds is LatLngBoundsLiteral {
     return bounds != null && (bounds as any).extend === undefined;
   }
 
   private _handleMapCenterChange() {
-    const s = this._mapsWrapper.subscribeToMapEvent('center_changed').subscribe(() => {
-      this._mapsWrapper.getCenter().then((center: google.maps.LatLng) => {
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('center_changed').subscribe(() => {
+      this._mapsWrapper.getCenter().then((center: LatLng) => {
         this.latitude = center.lat();
         this.longitude = center.lng();
-        this.centerChange.emit({lat: this.latitude, lng: this.longitude} as google.maps.LatLngLiteral);
+        this.centerChange.emit({lat: this.latitude, lng: this.longitude} as LatLngLiteral);
       });
     });
     this._observableSubscriptions.push(s);
   }
 
   private _handleBoundsChange() {
-    const s = this._mapsWrapper.subscribeToMapEvent('bounds_changed').subscribe(() => {
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('bounds_changed').subscribe(() => {
       this._mapsWrapper.getBounds().then(
-        (bounds: google.maps.LatLngBounds) => { this.boundsChange.emit(bounds); });
+        (bounds: LatLngBounds) => { this.boundsChange.emit(bounds); });
     });
     this._observableSubscriptions.push(s);
   }
 
   private _handleMapTypeIdChange() {
-    const s = this._mapsWrapper.subscribeToMapEvent('maptypeid_changed').subscribe(() => {
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('maptypeid_changed').subscribe(() => {
       this._mapsWrapper.getMapTypeId().then(
-        (mapTypeId: google.maps.MapTypeId) => { this.mapTypeIdChange.emit(mapTypeId); });
+        (mapTypeId: MapTypeId) => { this.mapTypeIdChange.emit(mapTypeId); });
     });
     this._observableSubscriptions.push(s);
   }
 
   private _handleMapZoomChange() {
-    const s = this._mapsWrapper.subscribeToMapEvent('zoom_changed').subscribe(() => {
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('zoom_changed').subscribe(() => {
       this._mapsWrapper.getZoom().then((z: number) => {
         this.zoom = z;
         this.zoomChange.emit(z);
@@ -632,20 +609,24 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private _handleIdleEvent() {
-    const s = this._mapsWrapper.subscribeToMapEvent('idle').subscribe(
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('idle').subscribe(
       () => { this.idle.emit(void 0); });
     this._observableSubscriptions.push(s);
   }
 
   private _handleTilesLoadedEvent() {
-    const s = this._mapsWrapper.subscribeToMapEvent('tilesloaded').subscribe(
+    const s = this._mapsWrapper.subscribeToMapEvent<void>('tilesloaded').subscribe(
       () => this.tilesLoaded.emit(void 0),
     );
     this._observableSubscriptions.push(s);
   }
 
   private _handleMapMouseEvents() {
-    type Event = { name: 'rightclick' | 'click' | 'dblclick', emitter: EventEmitter<google.maps.MouseEvent> };
+    interface Emitter {
+      emit(value: any): void;
+    }
+
+    type Event = { name: string, emitter: Emitter };
 
     const events: Event[] = [
       {name: 'click', emitter: this.mapClick},
@@ -653,35 +634,23 @@ export class AgmMap implements OnChanges, AfterContentInit, OnDestroy {
       {name: 'dblclick', emitter: this.mapDblClick},
     ];
 
-    events.forEach(e => {
-      const s = this._mapsWrapper.subscribeToMapEvent(e.name).subscribe(
-        ([event]) => {
+    events.forEach((e: Event) => {
+      const s = this._mapsWrapper.subscribeToMapEvent<{latLng: LatLng}>(e.name).subscribe(
+        (event: {latLng: LatLng}) => {
+          let value: MouseEvent = {
+            coords: {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng(),
+            },
+            placeId: (event as {latLng: LatLng, placeId: string}).placeId,
+          };
           // the placeId will be undefined in case the event was not an IconMouseEvent (google types)
-          if ( (event as google.maps.IconMouseEvent).placeId && !this.showDefaultInfoWindow) {
-            event.stop();
+          if (value.placeId && !this.showDefaultInfoWindow) {
+            (event as any).stop();
           }
-          e.emitter.emit(event);
+          e.emitter.emit(value);
         });
       this._observableSubscriptions.push(s);
     });
-  }
-
-  _handleControlChange() {
-    this._setControls();
-    this.mapControls.changes.subscribe(() => this._setControls());
-  }
-
-  _setControls() {
-    const controlOptions: Partial<google.maps.MapOptions> = {
-      fullscreenControl: !this.disableDefaultUI,
-      mapTypeControl: false,
-      panControl: false,
-      rotateControl: false,
-      scaleControl: false,
-      streetViewControl: !this.disableDefaultUI,
-      zoomControl: !this.disableDefaultUI,
-    };
-    this.mapControls.forEach(control => Object.assign(controlOptions, control.getOptions()));
-    this._mapsWrapper.setMapOptions(controlOptions);
   }
 }

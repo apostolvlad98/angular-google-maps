@@ -1,22 +1,35 @@
 import { NgZone, QueryList } from '@angular/core';
 import { fakeAsync, flushMicrotasks, inject, TestBed } from '@angular/core/testing';
 
+import { AgmPolylineIcon } from '@agm/core/directives/polyline-icon';
 import { Subject } from 'rxjs';
 import { AgmPolyline } from '../../directives/polyline';
-import { AgmPolylineIcon } from '../../directives/polyline-icon';
 import { GoogleMapsAPIWrapper } from '../../services/google-maps-api-wrapper';
+import { Polyline } from '../../services/google-maps-types';
 import { PolylineManager } from '../../services/managers/polyline-manager';
 
 describe('PolylineManager', () => {
   beforeAll(() => {
-    Object.assign((window as any).google.maps, {
-      Point: class Point {
-        constructor(public x: number, public y: number) { }
+    (window as any).google = {
+      maps: {
+        Point: class Point {
+          constructor(public x: number, public y: number) {
+
+          }
+        },
+        SymbolPath: {
+          BACKWARD_CLOSED_ARROW: 3,
+          BACKWARD_OPEN_ARROW: 4,
+          CIRCLE: 0,
+          FORWARD_CLOSED_ARROW: 1,
+          FORWARD_OPEN_ARROW: 2,
+        },
       },
-    });
+    };
   });
 
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       providers: [
         {provide: NgZone, useFactory: () => new NgZone({enableLongStackTrace: true})},
@@ -121,7 +134,7 @@ describe('PolylineManager', () => {
       (polylineManager: PolylineManager, apiWrapper: GoogleMapsAPIWrapper) => {
         const testPolyline = {
           setOptions: jest.fn(),
-        } as any as google.maps.Polyline;
+        } as any as Polyline;
         (apiWrapper.createPolyline as jest.Mock).mockReturnValue(Promise.resolve(testPolyline));
 
         const iconArray = [{
@@ -206,7 +219,7 @@ describe('PolylineManager', () => {
            (polylineManager: PolylineManager, apiWrapper: GoogleMapsAPIWrapper) => {
              const newPolyline = new AgmPolyline(polylineManager);
 
-             const polylineInstance: Partial<google.maps.Polyline> = {
+             const polylineInstance: Partial<Polyline> = {
               setMap: jest.fn(),
              };
              (apiWrapper.createPolyline as jest.Mock).mockReturnValue(Promise.resolve(polylineInstance));

@@ -1,8 +1,8 @@
 import { AfterContentInit, ContentChildren, Directive, EventEmitter, Input, OnChanges, OnDestroy, Output, QueryList, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { LatLng, PolyMouseEvent } from '../services/google-maps-types';
 import { PolylineManager } from '../services/managers/polyline-manager';
-import { MVCEvent } from '../utils/mvcarray-utils';
 import { AgmPolylineIcon } from './polyline-icon';
 import { AgmPolylinePoint } from './polyline-point';
 
@@ -92,62 +92,62 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
   /**
    * This event is fired when the DOM click event is fired on the Polyline.
    */
-  @Output() lineClick: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineClick: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired when the DOM dblclick event is fired on the Polyline.
    */
-  @Output() lineDblClick: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineDblClick: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is repeatedly fired while the user drags the polyline.
    */
-  @Output() lineDrag: EventEmitter<google.maps.MouseEvent> = new EventEmitter<google.maps.MouseEvent>();
+  @Output() lineDrag: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event is fired when the user stops dragging the polyline.
    */
-  @Output() lineDragEnd: EventEmitter<google.maps.MouseEvent> = new EventEmitter<google.maps.MouseEvent>();
+  @Output() lineDragEnd: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event is fired when the user starts dragging the polyline.
    */
-  @Output() lineDragStart: EventEmitter<google.maps.MouseEvent> = new EventEmitter<google.maps.MouseEvent>();
+  @Output() lineDragStart: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /**
    * This event is fired when the DOM mousedown event is fired on the Polyline.
    */
-  @Output() lineMouseDown: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineMouseDown: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired when the DOM mousemove event is fired on the Polyline.
    */
-  @Output() lineMouseMove: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineMouseMove: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired on Polyline mouseout.
    */
-  @Output() lineMouseOut: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineMouseOut: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired on Polyline mouseover.
    */
-  @Output() lineMouseOver: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineMouseOver: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired whe the DOM mouseup event is fired on the Polyline
    */
-  @Output() lineMouseUp: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineMouseUp: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired when the Polyline is right-clicked on.
    */
-  @Output() lineRightClick: EventEmitter<google.maps.PolyMouseEvent> = new EventEmitter<google.maps.PolyMouseEvent>();
+  @Output() lineRightClick: EventEmitter<PolyMouseEvent> = new EventEmitter<PolyMouseEvent>();
 
   /**
    * This event is fired after Polyline's path changes.
    */
-  @Output() polyPathChange = new EventEmitter<MVCEvent<google.maps.LatLng>>();
+  @Output() polyPathChange = new EventEmitter<PathEvent>();
 
   /**
    * @internal
@@ -156,7 +156,7 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
 
   @ContentChildren(AgmPolylineIcon) iconSequences: QueryList<AgmPolylineIcon>;
 
-  private static _polylineOptionsAttributes: string[] = [
+  private static _polylineOptionsAttributes: Array<string> = [
     'draggable', 'editable', 'visible', 'geodesic', 'strokeColor', 'strokeOpacity', 'strokeWeight',
     'zIndex',
   ];
@@ -193,14 +193,14 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
       return;
     }
 
-    const options: {[propName: string]: any} = {};
+    let options: {[propName: string]: any} = {};
     const optionKeys = Object.keys(changes).filter(
         k => AgmPolyline._polylineOptionsAttributes.indexOf(k) !== -1);
     optionKeys.forEach(k => options[k] = changes[k].currentValue);
     this._polylineManager.setPolylineOptions(this, options);
   }
 
-  getPath(): Promise<google.maps.LatLng[]> {
+  getPath(): Promise<Array<LatLng>> {
     return this._polylineManager.getPath(this);
   }
 
@@ -212,17 +212,17 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
 
   private _addEventListeners() {
     const handlers = [
-      {name: 'click', handler: (ev: google.maps.PolyMouseEvent) => this.lineClick.emit(ev)},
-      {name: 'dblclick', handler: (ev: google.maps.PolyMouseEvent) => this.lineDblClick.emit(ev)},
-      {name: 'drag', handler: (ev: google.maps.MouseEvent) => this.lineDrag.emit(ev)},
-      {name: 'dragend', handler: (ev: google.maps.MouseEvent) => this.lineDragEnd.emit(ev)},
-      {name: 'dragstart', handler: (ev: google.maps.MouseEvent) => this.lineDragStart.emit(ev)},
-      {name: 'mousedown', handler: (ev: google.maps.PolyMouseEvent) => this.lineMouseDown.emit(ev)},
-      {name: 'mousemove', handler: (ev: google.maps.PolyMouseEvent) => this.lineMouseMove.emit(ev)},
-      {name: 'mouseout', handler: (ev: google.maps.PolyMouseEvent) => this.lineMouseOut.emit(ev)},
-      {name: 'mouseover', handler: (ev: google.maps.PolyMouseEvent) => this.lineMouseOver.emit(ev)},
-      {name: 'mouseup', handler: (ev: google.maps.PolyMouseEvent) => this.lineMouseUp.emit(ev)},
-      {name: 'rightclick', handler: (ev: google.maps.PolyMouseEvent) => this.lineRightClick.emit(ev)},
+      {name: 'click', handler: (ev: PolyMouseEvent) => this.lineClick.emit(ev)},
+      {name: 'dblclick', handler: (ev: PolyMouseEvent) => this.lineDblClick.emit(ev)},
+      {name: 'drag', handler: (ev: MouseEvent) => this.lineDrag.emit(ev)},
+      {name: 'dragend', handler: (ev: MouseEvent) => this.lineDragEnd.emit(ev)},
+      {name: 'dragstart', handler: (ev: MouseEvent) => this.lineDragStart.emit(ev)},
+      {name: 'mousedown', handler: (ev: PolyMouseEvent) => this.lineMouseDown.emit(ev)},
+      {name: 'mousemove', handler: (ev: PolyMouseEvent) => this.lineMouseMove.emit(ev)},
+      {name: 'mouseout', handler: (ev: PolyMouseEvent) => this.lineMouseOut.emit(ev)},
+      {name: 'mouseover', handler: (ev: PolyMouseEvent) => this.lineMouseOver.emit(ev)},
+      {name: 'mouseup', handler: (ev: PolyMouseEvent) => this.lineMouseUp.emit(ev)},
+      {name: 'rightclick', handler: (ev: PolyMouseEvent) => this.lineRightClick.emit(ev)},
     ];
     handlers.forEach((obj) => {
       const os = this._polylineManager.createEventObservable(obj.name, this).subscribe(obj.handler);
@@ -236,7 +236,7 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
   }
 
   /** @internal */
-  _getPoints(): AgmPolylinePoint[] {
+  _getPoints(): Array<AgmPolylinePoint> {
     if (this.points) {
       return this.points.toArray();
     }
@@ -259,4 +259,11 @@ export class AgmPolyline implements OnDestroy, OnChanges, AfterContentInit {
     // unsubscribe all registered observable subscriptions
     this._subscriptions.forEach((s) => s.unsubscribe());
   }
+}
+
+export interface PathEvent {
+  newArr: LatLng[];
+  evName: 'insert_at' | 'remove_at' | 'set_at';
+  index: number;
+  previous?: LatLng;
 }
