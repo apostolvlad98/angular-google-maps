@@ -20,8 +20,8 @@
   "scripts": {
     "clean": "rimraf dist node_modules/@agm",
     "prebuild": "yarn clean",
-    "build": "ng build core && ng build markerclusterer && ng build snazzy-info-window && ng build drawing",
-    "build:prod": "ng build core --configuration production && ng build markerclusterer --configuration production && ng build snazzy-info-window --configuration production && ng build drawing --configuration production",
+    "build": "ng build core",
+    "build:prod": "ng build core --configuration production",
     "lint": "ng lint",
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -58,8 +58,10 @@
     "@compodoc/compodoc": "^1.1.10",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.0",
+    "angular-eslint": "18.0.1",
     "codelyzer": "^6.0.0",
     "conventional-changelog": "^3.1.21",
+    "eslint": "^9.3.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.1.0",
     "ng-packagr": "^18.0.0",
@@ -68,6 +70,7 @@
     "ts-node": "~8.10.2",
     "tslint": "~6.1.0",
     "typescript": "~5.4.5",
-    "yarn": "^1.22.4"
+    "typescript-eslint": "8.0.0-alpha.20",
+    "yarn": "1.22.19"
   }
 }
