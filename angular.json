@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": "96fb759e-a762-4d89-9f36-f45f461c1ad0"
   },
   "newProjectRoot": "packages",
   "projects": {
@@ -25,65 +26,5 @@
           }
         }
       }
-    },
-    "markerclusterer": {
-      "projectType": "library",
-      "root": "packages/markerclusterer",
-      "sourceRoot": "packages/markerclusterer/src",
-      "prefix": "agm",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "packages/markerclusterer/tsconfig.lib.json",
-            "project": "packages/markerclusterer/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "packages/markerclusterer/tsconfig.lib.prod.json"
-            }
-          }
-        }
-      }
-    },
-    "snazzy-info-window": {
-      "projectType": "library",
-      "root": "packages/snazzy-info-window",
-      "sourceRoot": "packages/snazzy-info-window/src",
-      "prefix": "agm",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "packages/snazzy-info-window/tsconfig.lib.json",
-            "project": "packages/snazzy-info-window/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "packages/snazzy-info-window/tsconfig.lib.prod.json"
-            }
-          }
-        }
-      }
-    },
-    "drawing": {
-      "projectType": "library",
-      "root": "packages/drawing",
-      "sourceRoot": "packages/drawing/src",
-      "prefix": "agm",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "packages/drawing/tsconfig.lib.json",
-            "project": "packages/drawing/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "packages/drawing/tsconfig.lib.prod.json"
-            }
-          }
-        }
-      }
-    }},
+    }
 }
