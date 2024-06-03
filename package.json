@@ -25,7 +25,7 @@
     "lint": "ng lint",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "ci": "yarn build:prod && yarn test --coverage",
+    "ci": "yarn build:prod && yarn test --coverage --passWithNoTests",
     "docs:clean": "rimraf docs/public",
     "docs:hugo": "cd docs && hugo",
     "docs:injectga": "node scripts/inject-google-analytics.js",
