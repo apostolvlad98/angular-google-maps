@@ -32,7 +32,7 @@ import * as i14 from "./directives/transit-layer";
 /**
  * @internal
  */
-export declare function coreDirectives(): (typeof AgmCircle | typeof AgmDataLayer | typeof AgmMarker | typeof AgmInfoWindow | typeof AgmKmlLayer | typeof AgmBicyclingLayer | typeof AgmTransitLayer | typeof AgmPolygon | typeof AgmPolylineIcon | typeof AgmPolylinePoint | typeof AgmPolyline | typeof AgmRectangle | typeof AgmFitBounds | typeof AgmMap)[];
+export declare function coreDirectives(): (typeof AgmBicyclingLayer | typeof AgmCircle | typeof AgmDataLayer | typeof AgmFitBounds | typeof AgmInfoWindow | typeof AgmKmlLayer | typeof AgmMap | typeof AgmMarker | typeof AgmPolygon | typeof AgmPolyline | typeof AgmPolylineIcon | typeof AgmPolylinePoint | typeof AgmRectangle | typeof AgmTransitLayer)[];
 /**
  * The angular-google-maps core module. Contains all Directives/Services/Pipes
  * of the core module. Please use `AgmCoreModule.forRoot()` in your app module.
@@ -46,3 +46,4 @@ export declare class AgmCoreModule {
     static ɵmod: i0.ɵɵNgModuleDeclaration<AgmCoreModule, [typeof i1.AgmBicyclingLayer, typeof i2.AgmCircle, typeof i3.AgmDataLayer, typeof i4.AgmFitBounds, typeof i5.AgmInfoWindow, typeof i6.AgmKmlLayer, typeof i7.AgmMap, typeof i8.AgmMarker, typeof i9.AgmPolygon, typeof i10.AgmPolyline, typeof i11.AgmPolylineIcon, typeof i12.AgmPolylinePoint, typeof i13.AgmRectangle, typeof i14.AgmTransitLayer], never, [typeof i1.AgmBicyclingLayer, typeof i2.AgmCircle, typeof i3.AgmDataLayer, typeof i4.AgmFitBounds, typeof i5.AgmInfoWindow, typeof i6.AgmKmlLayer, typeof i7.AgmMap, typeof i8.AgmMarker, typeof i9.AgmPolygon, typeof i10.AgmPolyline, typeof i11.AgmPolylineIcon, typeof i12.AgmPolylinePoint, typeof i13.AgmRectangle, typeof i14.AgmTransitLayer]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<AgmCoreModule>;
 }
+//# sourceMappingURL=core.module.d.ts.map

@@ -26,3 +26,4 @@ export declare class PolylineManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<PolylineManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<PolylineManager>;
 }
+//# sourceMappingURL=polyline-manager.d.ts.map

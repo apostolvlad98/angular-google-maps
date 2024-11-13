@@ -615,3 +615,4 @@ export declare enum GeocoderStatus {
     UNKNOWN_ERROR = "UNKNOWN_ERROR",
     ZERO_RESULTS = "ZERO_RESULTS"
 }
+//# sourceMappingURL=google-maps-types.d.ts.map

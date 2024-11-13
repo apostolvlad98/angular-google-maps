@@ -197,3 +197,4 @@ export interface PathCollectionChangePolygonPathEvent extends PolygonPathEvent<A
 export interface PathChangePolygonPathEvent extends PolygonPathEvent<LatLng> {
     pathIndex: number;
 }
+//# sourceMappingURL=polygon.d.ts.map

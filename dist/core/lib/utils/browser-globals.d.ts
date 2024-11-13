@@ -6,3 +6,4 @@ export declare class DocumentRef {
     getNativeDocument(): any;
 }
 export declare const BROWSER_GLOBALS_PROVIDERS: Provider[];
+//# sourceMappingURL=browser-globals.d.ts.map

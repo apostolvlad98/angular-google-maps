@@ -7,3 +7,4 @@ import { MapsAPILoader } from './maps-api-loader';
 export declare class NoOpMapsAPILoader implements MapsAPILoader {
     load(): Promise<void>;
 }
+//# sourceMappingURL=noop-maps-api-loader.d.ts.map

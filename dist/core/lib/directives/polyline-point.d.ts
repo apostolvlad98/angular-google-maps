@@ -27,3 +27,4 @@ export declare class AgmPolylinePoint implements OnChanges, FitBoundsAccessor {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmPolylinePoint, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmPolylinePoint, "agm-polyline-point", never, { "latitude": { "alias": "latitude"; "required": false; }; "longitude": { "alias": "longitude"; "required": false; }; }, { "positionChanged": "positionChanged"; }, never, never, false, never>;
 }
+//# sourceMappingURL=polyline-point.d.ts.map

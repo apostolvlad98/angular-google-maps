@@ -22,3 +22,4 @@ export declare class PolygonManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<PolygonManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<PolygonManager>;
 }
+//# sourceMappingURL=polygon-manager.d.ts.map

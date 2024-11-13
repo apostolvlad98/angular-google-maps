@@ -13,3 +13,4 @@ export { NoOpMapsAPILoader } from './services/maps-api-loader/noop-maps-api-load
 export { PolygonManager } from './services/managers/polygon-manager';
 export { PolylineManager } from './services/managers/polyline-manager';
 export { RectangleManager } from './services/managers/rectangle-manager';
+//# sourceMappingURL=services.d.ts.map

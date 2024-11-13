@@ -80,3 +80,4 @@ export declare class LazyMapsAPILoader extends MapsAPILoader {
     static ɵfac: i0.ɵɵFactoryDeclaration<LazyMapsAPILoader, [{ optional: true; }, null, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<LazyMapsAPILoader>;
 }
+//# sourceMappingURL=lazy-maps-api-loader.d.ts.map

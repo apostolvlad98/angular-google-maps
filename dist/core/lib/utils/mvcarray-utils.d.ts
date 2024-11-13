@@ -23,3 +23,4 @@ export declare class MvcArrayMock<T> implements MVCArray<T> {
     forEach(callback: (elem: T, i: number) => void): void;
     addListener(eventName: string, handler: Function): MapsEventListener;
 }
+//# sourceMappingURL=mvcarray-utils.d.ts.map

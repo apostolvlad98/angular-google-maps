@@ -12,3 +12,4 @@ export { AgmPolylineIcon } from './directives/polyline-icon';
 export { AgmPolylinePoint } from './directives/polyline-point';
 export { AgmRectangle } from './directives/rectangle';
 export { AgmTransitLayer } from './directives/transit-layer';
+//# sourceMappingURL=directives.d.ts.map

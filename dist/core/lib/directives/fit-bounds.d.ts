@@ -34,3 +34,4 @@ export declare class AgmFitBounds implements OnInit, OnDestroy, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmFitBounds, [{ self: true; }, null]>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmFitBounds, "[agmFitBounds]", never, { "agmFitBounds": { "alias": "agmFitBounds"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=fit-bounds.d.ts.map

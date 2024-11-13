@@ -1,0 +1,1 @@
+{"version":3,"file":"browser-globals.d.ts","sourceRoot":"","sources":["../../../../packages/core/src/lib/utils/browser-globals.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AAEzC,qBAAa,SAAS;IACpB,eAAe,IAAI,GAAG;CACvB;AAED,qBAAa,WAAW;IACtB,iBAAiB,IAAI,GAAG;CACzB;AAED,eAAO,MAAM,yBAAyB,EAAE,QAAQ,EAA6B,CAAC"}

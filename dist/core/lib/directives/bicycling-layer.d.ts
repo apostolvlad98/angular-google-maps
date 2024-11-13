@@ -21,3 +21,4 @@ export declare class AgmBicyclingLayer implements OnInit, OnChanges, OnDestroy {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmBicyclingLayer, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmBicyclingLayer, "agm-bicycling-layer", never, { "visible": { "alias": "visible"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=bicycling-layer.d.ts.map

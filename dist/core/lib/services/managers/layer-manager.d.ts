@@ -40,3 +40,4 @@ export declare class LayerManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<LayerManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<LayerManager>;
 }
+//# sourceMappingURL=layer-manager.d.ts.map

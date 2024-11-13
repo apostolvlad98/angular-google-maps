@@ -81,12 +81,12 @@ var GeocoderStatus;
 // exported map types
 
 class MapsAPILoader {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MapsAPILoader, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MapsAPILoader }); }
+    static { this.ɵfac = function MapsAPILoader_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || MapsAPILoader)(); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: MapsAPILoader, factory: MapsAPILoader.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MapsAPILoader, decorators: [{
-            type: Injectable
-        }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MapsAPILoader, [{
+        type: Injectable
+    }], null, null); })();
 
 /**
  * Wrapper class that handles the communication with the Google Maps Javascript
@@ -294,12 +294,12 @@ class GoogleMapsAPIWrapper {
     triggerMapEvent(eventName) {
         return this._map.then((m) => google.maps.event.trigger(m, eventName));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: GoogleMapsAPIWrapper, deps: [{ token: MapsAPILoader }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: GoogleMapsAPIWrapper }); }
+    static { this.ɵfac = function GoogleMapsAPIWrapper_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || GoogleMapsAPIWrapper)(i0.ɵɵinject(MapsAPILoader), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: GoogleMapsAPIWrapper, factory: GoogleMapsAPIWrapper.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: GoogleMapsAPIWrapper, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: MapsAPILoader }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(GoogleMapsAPIWrapper, [{
+        type: Injectable
+    }], () => [{ type: MapsAPILoader }, { type: i0.NgZone }], null); })();
 
 class CircleManager {
     constructor(_apiWrapper, _zone) {
@@ -381,12 +381,12 @@ class CircleManager {
             };
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CircleManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CircleManager }); }
+    static { this.ɵfac = function CircleManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || CircleManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: CircleManager, factory: CircleManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CircleManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(CircleManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 /**
  * Manages all Data Layers for a Google Map instance.
@@ -472,12 +472,12 @@ class DataLayerManager {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DataLayerManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DataLayerManager }); }
+    static { this.ɵfac = function DataLayerManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || DataLayerManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: DataLayerManager, factory: DataLayerManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DataLayerManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(DataLayerManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 /**
  * Class to implement when you what to be able to make it work with the auto fit bounds feature
@@ -522,12 +522,12 @@ class FitBoundsService {
     _createIdentifier(latLng) {
         return `${latLng.lat}+${latLng.lng}`;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: FitBoundsService, deps: [{ token: MapsAPILoader }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: FitBoundsService }); }
+    static { this.ɵfac = function FitBoundsService_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || FitBoundsService)(i0.ɵɵinject(MapsAPILoader)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: FitBoundsService, factory: FitBoundsService.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: FitBoundsService, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: MapsAPILoader }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(FitBoundsService, [{
+        type: Injectable
+    }], () => [{ type: MapsAPILoader }], null); })();
 
 class AgmGeocoder {
     constructor(loader) {
@@ -554,13 +554,13 @@ class AgmGeocoder {
     _createGeocoder() {
         return new google.maps.Geocoder();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmGeocoder, deps: [{ token: MapsAPILoader }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmGeocoder, providedIn: 'root' }); }
+    static { this.ɵfac = function AgmGeocoder_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmGeocoder)(i0.ɵɵinject(MapsAPILoader)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: AgmGeocoder, factory: AgmGeocoder.ɵfac, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmGeocoder, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: MapsAPILoader }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmGeocoder, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], () => [{ type: MapsAPILoader }], null); })();
 
 class WindowRef {
     getNativeWindow() { return window; }
@@ -672,20 +672,20 @@ class LazyMapsAPILoader extends MapsAPILoader {
             .join('&');
         return `${protocol}//${hostAndPath}?${params}`;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyMapsAPILoader, deps: [{ token: LAZY_MAPS_API_CONFIG, optional: true }, { token: WindowRef }, { token: DocumentRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyMapsAPILoader }); }
+    static { this.ɵfac = function LazyMapsAPILoader_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || LazyMapsAPILoader)(i0.ɵɵinject(LAZY_MAPS_API_CONFIG, 8), i0.ɵɵinject(WindowRef), i0.ɵɵinject(DocumentRef), i0.ɵɵinject(LOCALE_ID)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: LazyMapsAPILoader, factory: LazyMapsAPILoader.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyMapsAPILoader, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [LAZY_MAPS_API_CONFIG]
-                }] }, { type: WindowRef }, { type: DocumentRef }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [LOCALE_ID]
-                }] }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(LazyMapsAPILoader, [{
+        type: Injectable
+    }], () => [{ type: undefined, decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [LAZY_MAPS_API_CONFIG]
+            }] }, { type: WindowRef }, { type: DocumentRef }, { type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }] }], null); })();
 
 class MarkerManager {
     constructor(_mapsWrapper, _zone) {
@@ -770,12 +770,12 @@ class MarkerManager {
             });
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MarkerManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MarkerManager }); }
+    static { this.ɵfac = function MarkerManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || MarkerManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: MarkerManager, factory: MarkerManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MarkerManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MarkerManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 class InfoWindowManager {
     constructor(_mapsWrapper, _zone, _markerManager) {
@@ -846,12 +846,12 @@ class InfoWindowManager {
             });
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: InfoWindowManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }, { token: MarkerManager }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: InfoWindowManager }); }
+    static { this.ɵfac = function InfoWindowManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || InfoWindowManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone), i0.ɵɵinject(MarkerManager)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: InfoWindowManager, factory: InfoWindowManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: InfoWindowManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }, { type: MarkerManager }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(InfoWindowManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }, { type: MarkerManager }], null); })();
 
 /**
  * Manages all KML Layers for a Google Map instance.
@@ -898,12 +898,12 @@ class KmlLayerManager {
             });
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: KmlLayerManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: KmlLayerManager }); }
+    static { this.ɵfac = function KmlLayerManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || KmlLayerManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: KmlLayerManager, factory: KmlLayerManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: KmlLayerManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(KmlLayerManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 /**
  * This class manages Transit and Bicycling Layers for a Google Map instance.
@@ -963,12 +963,12 @@ class LayerManager {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LayerManager, deps: [{ token: GoogleMapsAPIWrapper }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LayerManager }); }
+    static { this.ɵfac = function LayerManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || LayerManager)(i0.ɵɵinject(GoogleMapsAPIWrapper)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: LayerManager, factory: LayerManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LayerManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(LayerManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }], null); })();
 
 /**
  * When using the NoOpMapsAPILoader, the Google Maps API must be added to the page via a `<script>`
@@ -1145,12 +1145,12 @@ class PolygonManager {
             return retVal;
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolygonManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolygonManager }); }
+    static { this.ɵfac = function PolygonManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || PolygonManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: PolygonManager, factory: PolygonManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolygonManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(PolygonManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 class PolylineManager {
     constructor(_mapsWrapper, _zone) {
@@ -1273,12 +1273,12 @@ class PolylineManager {
         const mvcPath = await this.getMVCPath(line);
         return createMVCEventObservable(mvcPath);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolylineManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolylineManager }); }
+    static { this.ɵfac = function PolylineManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || PolylineManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: PolylineManager, factory: PolylineManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PolylineManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(PolylineManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 class RectangleManager {
     constructor(_apiWrapper, _zone) {
@@ -1360,12 +1360,12 @@ class RectangleManager {
             };
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RectangleManager, deps: [{ token: GoogleMapsAPIWrapper }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RectangleManager }); }
+    static { this.ɵfac = function RectangleManager_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || RectangleManager)(i0.ɵɵinject(GoogleMapsAPIWrapper), i0.ɵɵinject(i0.NgZone)); }; }
+    static { this.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: RectangleManager, factory: RectangleManager.ɵfac }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RectangleManager, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(RectangleManager, [{
+        type: Injectable
+    }], () => [{ type: GoogleMapsAPIWrapper }, { type: i0.NgZone }], null); })();
 
 let layerId$3 = 0;
 /*
@@ -1405,17 +1405,17 @@ class AgmBicyclingLayer {
     ngOnDestroy() {
         this._manager.deleteLayer(this);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmBicyclingLayer, deps: [{ token: LayerManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmBicyclingLayer, selector: "agm-bicycling-layer", inputs: { visible: "visible" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmBicyclingLayer_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmBicyclingLayer)(i0.ɵɵdirectiveInject(LayerManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmBicyclingLayer, selectors: [["agm-bicycling-layer"]], inputs: { visible: "visible" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmBicyclingLayer, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-bicycling-layer',
-                }]
-        }], ctorParameters: () => [{ type: LayerManager }], propDecorators: { visible: [{
-                type: Input
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmBicyclingLayer, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-bicycling-layer',
+            }]
+    }], () => [{ type: LayerManager }], { visible: [{
+            type: Input
+        }] }); })();
 
 class AgmCircle {
     static { this._mapOptions = [
@@ -1587,70 +1587,70 @@ class AgmCircle {
      */
     getBounds() { return this._manager.getBounds(this); }
     getCenter() { return this._manager.getCenter(this); }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmCircle, deps: [{ token: CircleManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmCircle, selector: "agm-circle", inputs: { latitude: "latitude", longitude: "longitude", clickable: "clickable", draggable: ["circleDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", radius: "radius", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokePosition: "strokePosition", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { centerChange: "centerChange", circleClick: "circleClick", circleDblClick: "circleDblClick", drag: "drag", dragEnd: "dragEnd", dragStart: "dragStart", mouseDown: "mouseDown", mouseMove: "mouseMove", mouseOut: "mouseOut", mouseOver: "mouseOver", mouseUp: "mouseUp", radiusChange: "radiusChange", rightClick: "rightClick" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmCircle_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmCircle)(i0.ɵɵdirectiveInject(CircleManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmCircle, selectors: [["agm-circle"]], inputs: { latitude: "latitude", longitude: "longitude", clickable: "clickable", draggable: [0, "circleDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", radius: "radius", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokePosition: "strokePosition", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { centerChange: "centerChange", circleClick: "circleClick", circleDblClick: "circleDblClick", drag: "drag", dragEnd: "dragEnd", dragStart: "dragStart", mouseDown: "mouseDown", mouseMove: "mouseMove", mouseOut: "mouseOut", mouseOver: "mouseOver", mouseUp: "mouseUp", radiusChange: "radiusChange", rightClick: "rightClick" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmCircle, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-circle',
-                }]
-        }], ctorParameters: () => [{ type: CircleManager }], propDecorators: { latitude: [{
-                type: Input
-            }], longitude: [{
-                type: Input
-            }], clickable: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['circleDraggable']
-            }], editable: [{
-                type: Input
-            }], fillColor: [{
-                type: Input
-            }], fillOpacity: [{
-                type: Input
-            }], radius: [{
-                type: Input
-            }], strokeColor: [{
-                type: Input
-            }], strokeOpacity: [{
-                type: Input
-            }], strokePosition: [{
-                type: Input
-            }], strokeWeight: [{
-                type: Input
-            }], visible: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], centerChange: [{
-                type: Output
-            }], circleClick: [{
-                type: Output
-            }], circleDblClick: [{
-                type: Output
-            }], drag: [{
-                type: Output
-            }], dragEnd: [{
-                type: Output
-            }], dragStart: [{
-                type: Output
-            }], mouseDown: [{
-                type: Output
-            }], mouseMove: [{
-                type: Output
-            }], mouseOut: [{
-                type: Output
-            }], mouseOver: [{
-                type: Output
-            }], mouseUp: [{
-                type: Output
-            }], radiusChange: [{
-                type: Output
-            }], rightClick: [{
-                type: Output
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmCircle, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-circle',
+            }]
+    }], () => [{ type: CircleManager }], { latitude: [{
+            type: Input
+        }], longitude: [{
+            type: Input
+        }], clickable: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['circleDraggable']
+        }], editable: [{
+            type: Input
+        }], fillColor: [{
+            type: Input
+        }], fillOpacity: [{
+            type: Input
+        }], radius: [{
+            type: Input
+        }], strokeColor: [{
+            type: Input
+        }], strokeOpacity: [{
+            type: Input
+        }], strokePosition: [{
+            type: Input
+        }], strokeWeight: [{
+            type: Input
+        }], visible: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], centerChange: [{
+            type: Output
+        }], circleClick: [{
+            type: Output
+        }], circleDblClick: [{
+            type: Output
+        }], drag: [{
+            type: Output
+        }], dragEnd: [{
+            type: Output
+        }], dragStart: [{
+            type: Output
+        }], mouseDown: [{
+            type: Output
+        }], mouseMove: [{
+            type: Output
+        }], mouseOut: [{
+            type: Output
+        }], mouseOver: [{
+            type: Output
+        }], mouseUp: [{
+            type: Output
+        }], radiusChange: [{
+            type: Output
+        }], rightClick: [{
+            type: Output
+        }] }); })();
 
 let layerId$2 = 0;
 /**
@@ -1899,21 +1899,21 @@ class AgmDataLayer {
         AgmDataLayer._dataOptionsAttributes.forEach(k => dataOptions[k] = changes.hasOwnProperty(k) ? changes[k].currentValue : this[k]);
         this._manager.setDataOptions(this, dataOptions);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmDataLayer, deps: [{ token: DataLayerManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmDataLayer, selector: "agm-data-layer", inputs: { geoJson: "geoJson", style: "style" }, outputs: { layerClick: "layerClick" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmDataLayer_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmDataLayer)(i0.ɵɵdirectiveInject(DataLayerManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmDataLayer, selectors: [["agm-data-layer"]], inputs: { geoJson: "geoJson", style: "style" }, outputs: { layerClick: "layerClick" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmDataLayer, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-data-layer',
-                }]
-        }], ctorParameters: () => [{ type: DataLayerManager }], propDecorators: { layerClick: [{
-                type: Output
-            }], geoJson: [{
-                type: Input
-            }], style: [{
-                type: Input
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmDataLayer, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-data-layer',
+            }]
+    }], () => [{ type: DataLayerManager }], { layerClick: [{
+            type: Output
+        }], geoJson: [{
+            type: Input
+        }], style: [{
+            type: Input
+        }] }); })();
 
 /**
  * Adds the given directive to the auto fit bounds feature when the value is true.
@@ -1982,20 +1982,21 @@ class AgmFitBounds {
             this._fitBoundsService.removeFromBounds(this._latestFitBoundsDetails.latLng);
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmFitBounds, deps: [{ token: FitBoundsAccessor, self: true }, { token: FitBoundsService }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmFitBounds, selector: "[agmFitBounds]", inputs: { agmFitBounds: "agmFitBounds" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmFitBounds_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmFitBounds)(i0.ɵɵdirectiveInject(FitBoundsAccessor, 2), i0.ɵɵdirectiveInject(FitBoundsService)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmFitBounds, selectors: [["", "agmFitBounds", ""]], inputs: { agmFitBounds: "agmFitBounds" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmFitBounds, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: '[agmFitBounds]',
-                }]
-        }], ctorParameters: () => [{ type: FitBoundsAccessor, decorators: [{
-                    type: Self
-                }] }, { type: FitBoundsService }], propDecorators: { agmFitBounds: [{
-                type: Input
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmFitBounds, [{
+        type: Directive,
+        args: [{
+                selector: '[agmFitBounds]',
+            }]
+    }], () => [{ type: FitBoundsAccessor, decorators: [{
+                type: Self
+            }] }, { type: FitBoundsService }], { agmFitBounds: [{
+            type: Input
+        }] }); })();
 
+const _c0$1 = ["*"];
 let infoWindowId = 0;
 /**
  * AgmInfoWindow renders a info window inside a {@link AgmMarker} or standalone.
@@ -2094,36 +2095,39 @@ class AgmInfoWindow {
     toString() { return 'AgmInfoWindow-' + this._id.toString(); }
     /** @internal */
     ngOnDestroy() { this._infoWindowManager.deleteInfoWindow(this); }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmInfoWindow, deps: [{ token: InfoWindowManager }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.11", type: AgmInfoWindow, selector: "agm-info-window", inputs: { latitude: "latitude", longitude: "longitude", disableAutoPan: "disableAutoPan", zIndex: "zIndex", maxWidth: "maxWidth", isOpen: "isOpen" }, outputs: { infoWindowClose: "infoWindowClose" }, usesOnChanges: true, ngImport: i0, template: `<div class='agm-info-window-content'>
-      <ng-content></ng-content>
-    </div>
-  `, isInline: true }); }
+    static { this.ɵfac = function AgmInfoWindow_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmInfoWindow)(i0.ɵɵdirectiveInject(InfoWindowManager), i0.ɵɵdirectiveInject(i0.ElementRef)); }; }
+    static { this.ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent({ type: AgmInfoWindow, selectors: [["agm-info-window"]], inputs: { latitude: "latitude", longitude: "longitude", disableAutoPan: "disableAutoPan", zIndex: "zIndex", maxWidth: "maxWidth", isOpen: "isOpen" }, outputs: { infoWindowClose: "infoWindowClose" }, features: [i0.ɵɵNgOnChangesFeature], ngContentSelectors: _c0$1, decls: 2, vars: 0, consts: [[1, "agm-info-window-content"]], template: function AgmInfoWindow_Template(rf, ctx) { if (rf & 1) {
+            i0.ɵɵprojectionDef();
+            i0.ɵɵelementStart(0, "div", 0);
+            i0.ɵɵprojection(1);
+            i0.ɵɵelementEnd();
+        } }, encapsulation: 2 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmInfoWindow, decorators: [{
-            type: Component,
-            args: [{
-                    selector: 'agm-info-window',
-                    template: `<div class='agm-info-window-content'>
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmInfoWindow, [{
+        type: Component,
+        args: [{
+                selector: 'agm-info-window',
+                template: `<div class='agm-info-window-content'>
       <ng-content></ng-content>
     </div>
   `,
-                }]
-        }], ctorParameters: () => [{ type: InfoWindowManager }, { type: i0.ElementRef }], propDecorators: { latitude: [{
-                type: Input
-            }], longitude: [{
-                type: Input
-            }], disableAutoPan: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], maxWidth: [{
-                type: Input
-            }], isOpen: [{
-                type: Input
-            }], infoWindowClose: [{
-                type: Output
-            }] } });
+            }]
+    }], () => [{ type: InfoWindowManager }, { type: i0.ElementRef }], { latitude: [{
+            type: Input
+        }], longitude: [{
+            type: Input
+        }], disableAutoPan: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], maxWidth: [{
+            type: Input
+        }], isOpen: [{
+            type: Input
+        }], infoWindowClose: [{
+            type: Output
+        }] }); })();
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(AgmInfoWindow, { className: "AgmInfoWindow" }); })();
 
 let layerId$1 = 0;
 class AgmKmlLayer {
@@ -2221,34 +2225,35 @@ class AgmKmlLayer {
         // unsubscribe all registered observable subscriptions
         this._subscriptions.forEach(s => s.unsubscribe());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmKmlLayer, deps: [{ token: KmlLayerManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmKmlLayer, selector: "agm-kml-layer", inputs: { clickable: "clickable", preserveViewport: "preserveViewport", screenOverlays: "screenOverlays", suppressInfoWindows: "suppressInfoWindows", url: "url", zIndex: "zIndex" }, outputs: { layerClick: "layerClick", defaultViewportChange: "defaultViewportChange", statusChange: "statusChange" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmKmlLayer_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmKmlLayer)(i0.ɵɵdirectiveInject(KmlLayerManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmKmlLayer, selectors: [["agm-kml-layer"]], inputs: { clickable: "clickable", preserveViewport: "preserveViewport", screenOverlays: "screenOverlays", suppressInfoWindows: "suppressInfoWindows", url: "url", zIndex: "zIndex" }, outputs: { layerClick: "layerClick", defaultViewportChange: "defaultViewportChange", statusChange: "statusChange" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmKmlLayer, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-kml-layer',
-                }]
-        }], ctorParameters: () => [{ type: KmlLayerManager }], propDecorators: { clickable: [{
-                type: Input
-            }], preserveViewport: [{
-                type: Input
-            }], screenOverlays: [{
-                type: Input
-            }], suppressInfoWindows: [{
-                type: Input
-            }], url: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], layerClick: [{
-                type: Output
-            }], defaultViewportChange: [{
-                type: Output
-            }], statusChange: [{
-                type: Output
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmKmlLayer, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-kml-layer',
+            }]
+    }], () => [{ type: KmlLayerManager }], { clickable: [{
+            type: Input
+        }], preserveViewport: [{
+            type: Input
+        }], screenOverlays: [{
+            type: Input
+        }], suppressInfoWindows: [{
+            type: Input
+        }], url: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], layerClick: [{
+            type: Output
+        }], defaultViewportChange: [{
+            type: Output
+        }], statusChange: [{
+            type: Output
+        }] }); })();
 
+const _c0 = ["*"];
 /**
  * AgmMap renders a Google Map.
  * **Important note**: To be able see a map in the browser, you have to define a height for the
@@ -2678,152 +2683,156 @@ class AgmMap {
             this._observableSubscriptions.push(s);
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmMap, deps: [{ token: i0.ElementRef }, { token: GoogleMapsAPIWrapper }, { token: PLATFORM_ID }, { token: FitBoundsService }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.11", type: AgmMap, selector: "agm-map", inputs: { longitude: "longitude", latitude: "latitude", zoom: "zoom", minZoom: "minZoom", maxZoom: "maxZoom", controlSize: "controlSize", draggable: ["mapDraggable", "draggable"], disableDoubleClickZoom: "disableDoubleClickZoom", disableDefaultUI: "disableDefaultUI", scrollwheel: "scrollwheel", backgroundColor: "backgroundColor", draggableCursor: "draggableCursor", draggingCursor: "draggingCursor", keyboardShortcuts: "keyboardShortcuts", zoomControl: "zoomControl", zoomControlOptions: "zoomControlOptions", styles: "styles", usePanning: "usePanning", streetViewControl: "streetViewControl", streetViewControlOptions: "streetViewControlOptions", fitBounds: "fitBounds", fitBoundsPadding: "fitBoundsPadding", scaleControl: "scaleControl", scaleControlOptions: "scaleControlOptions", mapTypeControl: "mapTypeControl", mapTypeControlOptions: "mapTypeControlOptions", panControl: "panControl", panControlOptions: "panControlOptions", rotateControl: "rotateControl", rotateControlOptions: "rotateControlOptions", fullscreenControl: "fullscreenControl", fullscreenControlOptions: "fullscreenControlOptions", mapTypeId: "mapTypeId", clickableIcons: "clickableIcons", showDefaultInfoWindow: "showDefaultInfoWindow", gestureHandling: "gestureHandling", tilt: "tilt", restriction: "restriction" }, outputs: { mapClick: "mapClick", mapRightClick: "mapRightClick", mapDblClick: "mapDblClick", centerChange: "centerChange", boundsChange: "boundsChange", mapTypeIdChange: "mapTypeIdChange", idle: "idle", zoomChange: "zoomChange", mapReady: "mapReady", tilesLoaded: "tilesLoaded" }, host: { properties: { "class.sebm-google-map-container": "true" } }, providers: [
-            CircleManager,
-            DataLayerManager,
-            DataLayerManager,
-            FitBoundsService,
-            GoogleMapsAPIWrapper,
-            InfoWindowManager,
-            KmlLayerManager,
-            LayerManager,
-            MarkerManager,
-            PolygonManager,
-            PolylineManager,
-            RectangleManager,
-        ], usesOnChanges: true, ngImport: i0, template: `
-              <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
-              <div class='agm-map-content'>
-                <ng-content></ng-content>
-              </div>
-  `, isInline: true, styles: [".agm-map-container-inner{width:inherit;height:inherit}.agm-map-content{display:none}\n"] }); }
+    static { this.ɵfac = function AgmMap_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmMap)(i0.ɵɵdirectiveInject(i0.ElementRef), i0.ɵɵdirectiveInject(GoogleMapsAPIWrapper), i0.ɵɵdirectiveInject(PLATFORM_ID), i0.ɵɵdirectiveInject(FitBoundsService), i0.ɵɵdirectiveInject(i0.NgZone)); }; }
+    static { this.ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent({ type: AgmMap, selectors: [["agm-map"]], hostVars: 2, hostBindings: function AgmMap_HostBindings(rf, ctx) { if (rf & 2) {
+            i0.ɵɵclassProp("sebm-google-map-container", true);
+        } }, inputs: { longitude: "longitude", latitude: "latitude", zoom: "zoom", minZoom: "minZoom", maxZoom: "maxZoom", controlSize: "controlSize", draggable: [0, "mapDraggable", "draggable"], disableDoubleClickZoom: "disableDoubleClickZoom", disableDefaultUI: "disableDefaultUI", scrollwheel: "scrollwheel", backgroundColor: "backgroundColor", draggableCursor: "draggableCursor", draggingCursor: "draggingCursor", keyboardShortcuts: "keyboardShortcuts", zoomControl: "zoomControl", zoomControlOptions: "zoomControlOptions", styles: "styles", usePanning: "usePanning", streetViewControl: "streetViewControl", streetViewControlOptions: "streetViewControlOptions", fitBounds: "fitBounds", fitBoundsPadding: "fitBoundsPadding", scaleControl: "scaleControl", scaleControlOptions: "scaleControlOptions", mapTypeControl: "mapTypeControl", mapTypeControlOptions: "mapTypeControlOptions", panControl: "panControl", panControlOptions: "panControlOptions", rotateControl: "rotateControl", rotateControlOptions: "rotateControlOptions", fullscreenControl: "fullscreenControl", fullscreenControlOptions: "fullscreenControlOptions", mapTypeId: "mapTypeId", clickableIcons: "clickableIcons", showDefaultInfoWindow: "showDefaultInfoWindow", gestureHandling: "gestureHandling", tilt: "tilt", restriction: "restriction" }, outputs: { mapClick: "mapClick", mapRightClick: "mapRightClick", mapDblClick: "mapDblClick", centerChange: "centerChange", boundsChange: "boundsChange", mapTypeIdChange: "mapTypeIdChange", idle: "idle", zoomChange: "zoomChange", mapReady: "mapReady", tilesLoaded: "tilesLoaded" }, features: [i0.ɵɵProvidersFeature([
+                CircleManager,
+                DataLayerManager,
+                DataLayerManager,
+                FitBoundsService,
+                GoogleMapsAPIWrapper,
+                InfoWindowManager,
+                KmlLayerManager,
+                LayerManager,
+                MarkerManager,
+                PolygonManager,
+                PolylineManager,
+                RectangleManager,
+            ]), i0.ɵɵNgOnChangesFeature], ngContentSelectors: _c0, decls: 3, vars: 0, consts: [[1, "agm-map-container-inner", "sebm-google-map-container-inner"], [1, "agm-map-content"]], template: function AgmMap_Template(rf, ctx) { if (rf & 1) {
+            i0.ɵɵprojectionDef();
+            i0.ɵɵelement(0, "div", 0);
+            i0.ɵɵelementStart(1, "div", 1);
+            i0.ɵɵprojection(2);
+            i0.ɵɵelementEnd();
+        } }, styles: [".agm-map-container-inner[_ngcontent-%COMP%]{width:inherit;height:inherit}.agm-map-content[_ngcontent-%COMP%]{display:none}"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmMap, decorators: [{
-            type: Component,
-            args: [{ selector: 'agm-map', providers: [
-                        CircleManager,
-                        DataLayerManager,
-                        DataLayerManager,
-                        FitBoundsService,
-                        GoogleMapsAPIWrapper,
-                        InfoWindowManager,
-                        KmlLayerManager,
-                        LayerManager,
-                        MarkerManager,
-                        PolygonManager,
-                        PolylineManager,
-                        RectangleManager,
-                    ], host: {
-                        // todo: deprecated - we will remove it with the next version
-                        '[class.sebm-google-map-container]': 'true',
-                    }, template: `
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmMap, [{
+        type: Component,
+        args: [{ selector: 'agm-map', providers: [
+                    CircleManager,
+                    DataLayerManager,
+                    DataLayerManager,
+                    FitBoundsService,
+                    GoogleMapsAPIWrapper,
+                    InfoWindowManager,
+                    KmlLayerManager,
+                    LayerManager,
+                    MarkerManager,
+                    PolygonManager,
+                    PolylineManager,
+                    RectangleManager,
+                ], host: {
+                    // todo: deprecated - we will remove it with the next version
+                    '[class.sebm-google-map-container]': 'true',
+                }, template: `
               <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
               <div class='agm-map-content'>
                 <ng-content></ng-content>
               </div>
   `, styles: [".agm-map-container-inner{width:inherit;height:inherit}.agm-map-content{display:none}\n"] }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GoogleMapsAPIWrapper }, { type: Object, decorators: [{
-                    type: Inject,
-                    args: [PLATFORM_ID]
-                }] }, { type: FitBoundsService }, { type: i0.NgZone }], propDecorators: { longitude: [{
-                type: Input
-            }], latitude: [{
-                type: Input
-            }], zoom: [{
-                type: Input
-            }], minZoom: [{
-                type: Input
-            }], maxZoom: [{
-                type: Input
-            }], controlSize: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['mapDraggable']
-            }], disableDoubleClickZoom: [{
-                type: Input
-            }], disableDefaultUI: [{
-                type: Input
-            }], scrollwheel: [{
-                type: Input
-            }], backgroundColor: [{
-                type: Input
-            }], draggableCursor: [{
-                type: Input
-            }], draggingCursor: [{
-                type: Input
-            }], keyboardShortcuts: [{
-                type: Input
-            }], zoomControl: [{
-                type: Input
-            }], zoomControlOptions: [{
-                type: Input
-            }], styles: [{
-                type: Input
-            }], usePanning: [{
-                type: Input
-            }], streetViewControl: [{
-                type: Input
-            }], streetViewControlOptions: [{
-                type: Input
-            }], fitBounds: [{
-                type: Input
-            }], fitBoundsPadding: [{
-                type: Input
-            }], scaleControl: [{
-                type: Input
-            }], scaleControlOptions: [{
-                type: Input
-            }], mapTypeControl: [{
-                type: Input
-            }], mapTypeControlOptions: [{
-                type: Input
-            }], panControl: [{
-                type: Input
-            }], panControlOptions: [{
-                type: Input
-            }], rotateControl: [{
-                type: Input
-            }], rotateControlOptions: [{
-                type: Input
-            }], fullscreenControl: [{
-                type: Input
-            }], fullscreenControlOptions: [{
-                type: Input
-            }], mapTypeId: [{
-                type: Input
-            }], clickableIcons: [{
-                type: Input
-            }], showDefaultInfoWindow: [{
-                type: Input
-            }], gestureHandling: [{
-                type: Input
-            }], tilt: [{
-                type: Input
-            }], restriction: [{
-                type: Input
-            }], mapClick: [{
-                type: Output
-            }], mapRightClick: [{
-                type: Output
-            }], mapDblClick: [{
-                type: Output
-            }], centerChange: [{
-                type: Output
-            }], boundsChange: [{
-                type: Output
-            }], mapTypeIdChange: [{
-                type: Output
-            }], idle: [{
-                type: Output
-            }], zoomChange: [{
-                type: Output
-            }], mapReady: [{
-                type: Output
-            }], tilesLoaded: [{
-                type: Output
-            }] } });
+    }], () => [{ type: i0.ElementRef }, { type: GoogleMapsAPIWrapper }, { type: Object, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }, { type: FitBoundsService }, { type: i0.NgZone }], { longitude: [{
+            type: Input
+        }], latitude: [{
+            type: Input
+        }], zoom: [{
+            type: Input
+        }], minZoom: [{
+            type: Input
+        }], maxZoom: [{
+            type: Input
+        }], controlSize: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['mapDraggable']
+        }], disableDoubleClickZoom: [{
+            type: Input
+        }], disableDefaultUI: [{
+            type: Input
+        }], scrollwheel: [{
+            type: Input
+        }], backgroundColor: [{
+            type: Input
+        }], draggableCursor: [{
+            type: Input
+        }], draggingCursor: [{
+            type: Input
+        }], keyboardShortcuts: [{
+            type: Input
+        }], zoomControl: [{
+            type: Input
+        }], zoomControlOptions: [{
+            type: Input
+        }], styles: [{
+            type: Input
+        }], usePanning: [{
+            type: Input
+        }], streetViewControl: [{
+            type: Input
+        }], streetViewControlOptions: [{
+            type: Input
+        }], fitBounds: [{
+            type: Input
+        }], fitBoundsPadding: [{
+            type: Input
+        }], scaleControl: [{
+            type: Input
+        }], scaleControlOptions: [{
+            type: Input
+        }], mapTypeControl: [{
+            type: Input
+        }], mapTypeControlOptions: [{
+            type: Input
+        }], panControl: [{
+            type: Input
+        }], panControlOptions: [{
+            type: Input
+        }], rotateControl: [{
+            type: Input
+        }], rotateControlOptions: [{
+            type: Input
+        }], fullscreenControl: [{
+            type: Input
+        }], fullscreenControlOptions: [{
+            type: Input
+        }], mapTypeId: [{
+            type: Input
+        }], clickableIcons: [{
+            type: Input
+        }], showDefaultInfoWindow: [{
+            type: Input
+        }], gestureHandling: [{
+            type: Input
+        }], tilt: [{
+            type: Input
+        }], restriction: [{
+            type: Input
+        }], mapClick: [{
+            type: Output
+        }], mapRightClick: [{
+            type: Output
+        }], mapDblClick: [{
+            type: Output
+        }], centerChange: [{
+            type: Output
+        }], boundsChange: [{
+            type: Output
+        }], mapTypeIdChange: [{
+            type: Output
+        }], idle: [{
+            type: Output
+        }], zoomChange: [{
+            type: Output
+        }], mapReady: [{
+            type: Output
+        }], tilesLoaded: [{
+            type: Output
+        }] }); })();
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(AgmMap, { className: "AgmMap" }); })();
 
 let markerId = 0;
 /**
@@ -3053,72 +3062,77 @@ class AgmMarker {
         // unsubscribe all registered observable subscriptions
         this._observableSubscriptions.forEach((s) => s.unsubscribe());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmMarker, deps: [{ token: MarkerManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmMarker, selector: "agm-marker", inputs: { latitude: "latitude", longitude: "longitude", title: "title", label: "label", draggable: ["markerDraggable", "draggable"], iconUrl: "iconUrl", openInfoWindow: "openInfoWindow", opacity: "opacity", visible: "visible", zIndex: "zIndex", animation: "animation", clickable: ["markerClickable", "clickable"] }, outputs: { markerClick: "markerClick", dragStart: "dragStart", drag: "drag", dragEnd: "dragEnd", mouseOver: "mouseOver", mouseOut: "mouseOut", animationChange: "animationChange", markerDblClick: "markerDblClick", markerRightClick: "markerRightClick" }, providers: [
-            { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmMarker) },
-        ], queries: [{ propertyName: "infoWindow", predicate: AgmInfoWindow }], usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmMarker_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmMarker)(i0.ɵɵdirectiveInject(MarkerManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmMarker, selectors: [["agm-marker"]], contentQueries: function AgmMarker_ContentQueries(rf, ctx, dirIndex) { if (rf & 1) {
+            i0.ɵɵcontentQuery(dirIndex, AgmInfoWindow, 4);
+        } if (rf & 2) {
+            let _t;
+            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.infoWindow = _t);
+        } }, inputs: { latitude: "latitude", longitude: "longitude", title: "title", label: "label", draggable: [0, "markerDraggable", "draggable"], iconUrl: "iconUrl", openInfoWindow: "openInfoWindow", opacity: "opacity", visible: "visible", zIndex: "zIndex", animation: "animation", clickable: [0, "markerClickable", "clickable"] }, outputs: { markerClick: "markerClick", dragStart: "dragStart", drag: "drag", dragEnd: "dragEnd", mouseOver: "mouseOver", mouseOut: "mouseOut", animationChange: "animationChange", markerDblClick: "markerDblClick", markerRightClick: "markerRightClick" }, features: [i0.ɵɵProvidersFeature([
+                { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmMarker) },
+            ]), i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmMarker, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-marker',
-                    providers: [
-                        { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmMarker) },
-                    ],
-                    inputs: [
-                        'latitude', 'longitude', 'title', 'label', 'draggable: markerDraggable', 'iconUrl',
-                        'openInfoWindow', 'opacity', 'visible', 'zIndex', 'animation',
-                    ],
-                    outputs: ['markerClick', 'dragStart', 'drag', 'dragEnd', 'mouseOver', 'mouseOut'],
-                }]
-        }], ctorParameters: () => [{ type: MarkerManager }], propDecorators: { latitude: [{
-                type: Input
-            }], longitude: [{
-                type: Input
-            }], title: [{
-                type: Input
-            }], label: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['markerDraggable']
-            }], iconUrl: [{
-                type: Input
-            }], visible: [{
-                type: Input
-            }], openInfoWindow: [{
-                type: Input
-            }], opacity: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], clickable: [{
-                type: Input,
-                args: ['markerClickable']
-            }], animation: [{
-                type: Input
-            }], animationChange: [{
-                type: Output
-            }], markerClick: [{
-                type: Output
-            }], markerDblClick: [{
-                type: Output
-            }], markerRightClick: [{
-                type: Output
-            }], dragStart: [{
-                type: Output
-            }], drag: [{
-                type: Output
-            }], dragEnd: [{
-                type: Output
-            }], mouseOver: [{
-                type: Output
-            }], mouseOut: [{
-                type: Output
-            }], infoWindow: [{
-                type: ContentChildren,
-                args: [AgmInfoWindow]
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmMarker, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-marker',
+                providers: [
+                    { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmMarker) },
+                ],
+                inputs: [
+                    'latitude', 'longitude', 'title', 'label', 'draggable: markerDraggable', 'iconUrl',
+                    'openInfoWindow', 'opacity', 'visible', 'zIndex', 'animation',
+                ],
+                outputs: ['markerClick', 'dragStart', 'drag', 'dragEnd', 'mouseOver', 'mouseOut'],
+            }]
+    }], () => [{ type: MarkerManager }], { latitude: [{
+            type: Input
+        }], longitude: [{
+            type: Input
+        }], title: [{
+            type: Input
+        }], label: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['markerDraggable']
+        }], iconUrl: [{
+            type: Input
+        }], visible: [{
+            type: Input
+        }], openInfoWindow: [{
+            type: Input
+        }], opacity: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], clickable: [{
+            type: Input,
+            args: ['markerClickable']
+        }], animation: [{
+            type: Input
+        }], animationChange: [{
+            type: Output
+        }], markerClick: [{
+            type: Output
+        }], markerDblClick: [{
+            type: Output
+        }], markerRightClick: [{
+            type: Output
+        }], dragStart: [{
+            type: Output
+        }], drag: [{
+            type: Output
+        }], dragEnd: [{
+            type: Output
+        }], mouseOver: [{
+            type: Output
+        }], mouseOut: [{
+            type: Output
+        }], infoWindow: [{
+            type: ContentChildren,
+            args: [AgmInfoWindow]
+        }] }); })();
 
 /**
  * AgmPolygon renders a polygon on a {@link AgmMap}
@@ -3327,64 +3341,64 @@ class AgmPolygon {
     getPaths() {
         return this._polygonManager.getPaths(this);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolygon, deps: [{ token: PolygonManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmPolygon, selector: "agm-polygon", inputs: { clickable: "clickable", draggable: ["polyDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", geodesic: "geodesic", paths: "paths", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { polyClick: "polyClick", polyDblClick: "polyDblClick", polyDrag: "polyDrag", polyDragEnd: "polyDragEnd", polyDragStart: "polyDragStart", polyMouseDown: "polyMouseDown", polyMouseMove: "polyMouseMove", polyMouseOut: "polyMouseOut", polyMouseOver: "polyMouseOver", polyMouseUp: "polyMouseUp", polyRightClick: "polyRightClick", polyPathsChange: "polyPathsChange" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmPolygon_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmPolygon)(i0.ɵɵdirectiveInject(PolygonManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmPolygon, selectors: [["agm-polygon"]], inputs: { clickable: "clickable", draggable: [0, "polyDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", geodesic: "geodesic", paths: "paths", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { polyClick: "polyClick", polyDblClick: "polyDblClick", polyDrag: "polyDrag", polyDragEnd: "polyDragEnd", polyDragStart: "polyDragStart", polyMouseDown: "polyMouseDown", polyMouseMove: "polyMouseMove", polyMouseOut: "polyMouseOut", polyMouseOver: "polyMouseOver", polyMouseUp: "polyMouseUp", polyRightClick: "polyRightClick", polyPathsChange: "polyPathsChange" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolygon, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-polygon',
-                }]
-        }], ctorParameters: () => [{ type: PolygonManager }], propDecorators: { clickable: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['polyDraggable']
-            }], editable: [{
-                type: Input
-            }], fillColor: [{
-                type: Input
-            }], fillOpacity: [{
-                type: Input
-            }], geodesic: [{
-                type: Input
-            }], paths: [{
-                type: Input
-            }], strokeColor: [{
-                type: Input
-            }], strokeOpacity: [{
-                type: Input
-            }], strokeWeight: [{
-                type: Input
-            }], visible: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], polyClick: [{
-                type: Output
-            }], polyDblClick: [{
-                type: Output
-            }], polyDrag: [{
-                type: Output
-            }], polyDragEnd: [{
-                type: Output
-            }], polyDragStart: [{
-                type: Output
-            }], polyMouseDown: [{
-                type: Output
-            }], polyMouseMove: [{
-                type: Output
-            }], polyMouseOut: [{
-                type: Output
-            }], polyMouseOver: [{
-                type: Output
-            }], polyMouseUp: [{
-                type: Output
-            }], polyRightClick: [{
-                type: Output
-            }], polyPathsChange: [{
-                type: Output
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmPolygon, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-polygon',
+            }]
+    }], () => [{ type: PolygonManager }], { clickable: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['polyDraggable']
+        }], editable: [{
+            type: Input
+        }], fillColor: [{
+            type: Input
+        }], fillOpacity: [{
+            type: Input
+        }], geodesic: [{
+            type: Input
+        }], paths: [{
+            type: Input
+        }], strokeColor: [{
+            type: Input
+        }], strokeOpacity: [{
+            type: Input
+        }], strokeWeight: [{
+            type: Input
+        }], visible: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], polyClick: [{
+            type: Output
+        }], polyDblClick: [{
+            type: Output
+        }], polyDrag: [{
+            type: Output
+        }], polyDragEnd: [{
+            type: Output
+        }], polyDragStart: [{
+            type: Output
+        }], polyMouseDown: [{
+            type: Output
+        }], polyMouseMove: [{
+            type: Output
+        }], polyMouseOut: [{
+            type: Output
+        }], polyMouseOver: [{
+            type: Output
+        }], polyMouseUp: [{
+            type: Output
+        }], polyRightClick: [{
+            type: Output
+        }], polyPathsChange: [{
+            type: Output
+        }] }); })();
 
 /**
  * AgmPolylineIcon enables to add polyline sequences to add arrows, circle,
@@ -3410,39 +3424,39 @@ class AgmPolylineIcon {
             throw new Error('Icon Sequence path is required');
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolylineIcon, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmPolylineIcon, selector: "agm-polyline agm-icon-sequence", inputs: { fixedRotation: "fixedRotation", offset: "offset", repeat: "repeat", anchorX: "anchorX", anchorY: "anchorY", fillColor: "fillColor", fillOpacity: "fillOpacity", path: "path", rotation: "rotation", scale: "scale", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight" }, ngImport: i0 }); }
+    static { this.ɵfac = function AgmPolylineIcon_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmPolylineIcon)(); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmPolylineIcon, selectors: [["agm-icon-sequence"]], inputs: { fixedRotation: "fixedRotation", offset: "offset", repeat: "repeat", anchorX: "anchorX", anchorY: "anchorY", fillColor: "fillColor", fillOpacity: "fillOpacity", path: "path", rotation: "rotation", scale: "scale", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight" } }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolylineIcon, decorators: [{
-            type: Directive,
-            args: [{ selector: 'agm-polyline agm-icon-sequence' }]
-        }], propDecorators: { fixedRotation: [{
-                type: Input
-            }], offset: [{
-                type: Input
-            }], repeat: [{
-                type: Input
-            }], anchorX: [{
-                type: Input
-            }], anchorY: [{
-                type: Input
-            }], fillColor: [{
-                type: Input
-            }], fillOpacity: [{
-                type: Input
-            }], path: [{
-                type: Input
-            }], rotation: [{
-                type: Input
-            }], scale: [{
-                type: Input
-            }], strokeColor: [{
-                type: Input
-            }], strokeOpacity: [{
-                type: Input
-            }], strokeWeight: [{
-                type: Input
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmPolylineIcon, [{
+        type: Directive,
+        args: [{ selector: 'agm-polyline agm-icon-sequence' }]
+    }], null, { fixedRotation: [{
+            type: Input
+        }], offset: [{
+            type: Input
+        }], repeat: [{
+            type: Input
+        }], anchorX: [{
+            type: Input
+        }], anchorY: [{
+            type: Input
+        }], fillColor: [{
+            type: Input
+        }], fillOpacity: [{
+            type: Input
+        }], path: [{
+            type: Input
+        }], rotation: [{
+            type: Input
+        }], scale: [{
+            type: Input
+        }], strokeColor: [{
+            type: Input
+        }], strokeOpacity: [{
+            type: Input
+        }], strokeWeight: [{
+            type: Input
+        }] }); })();
 
 /**
  * AgmPolylinePoint represents one element of a polyline within a  {@link
@@ -3468,26 +3482,26 @@ class AgmPolylinePoint {
     getFitBoundsDetails$() {
         return this.positionChanged.pipe(startWith({ lat: this.latitude, lng: this.longitude }), map(position => ({ latLng: position })));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolylinePoint, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmPolylinePoint, selector: "agm-polyline-point", inputs: { latitude: "latitude", longitude: "longitude" }, outputs: { positionChanged: "positionChanged" }, providers: [
-            { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmPolylinePoint) },
-        ], usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmPolylinePoint_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmPolylinePoint)(); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmPolylinePoint, selectors: [["agm-polyline-point"]], inputs: { latitude: "latitude", longitude: "longitude" }, outputs: { positionChanged: "positionChanged" }, features: [i0.ɵɵProvidersFeature([
+                { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmPolylinePoint) },
+            ]), i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolylinePoint, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-polyline-point',
-                    providers: [
-                        { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmPolylinePoint) },
-                    ],
-                }]
-        }], ctorParameters: () => [], propDecorators: { latitude: [{
-                type: Input
-            }], longitude: [{
-                type: Input
-            }], positionChanged: [{
-                type: Output
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmPolylinePoint, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-polyline-point',
+                providers: [
+                    { provide: FitBoundsAccessor, useExisting: forwardRef(() => AgmPolylinePoint) },
+                ],
+            }]
+    }], () => [], { latitude: [{
+            type: Input
+        }], longitude: [{
+            type: Input
+        }], positionChanged: [{
+            type: Output
+        }] }); })();
 
 let polylineId = 0;
 /**
@@ -3681,64 +3695,71 @@ class AgmPolyline {
         // unsubscribe all registered observable subscriptions
         this._subscriptions.forEach((s) => s.unsubscribe());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolyline, deps: [{ token: PolylineManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmPolyline, selector: "agm-polyline", inputs: { clickable: "clickable", draggable: ["polylineDraggable", "draggable"], editable: "editable", geodesic: "geodesic", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { lineClick: "lineClick", lineDblClick: "lineDblClick", lineDrag: "lineDrag", lineDragEnd: "lineDragEnd", lineDragStart: "lineDragStart", lineMouseDown: "lineMouseDown", lineMouseMove: "lineMouseMove", lineMouseOut: "lineMouseOut", lineMouseOver: "lineMouseOver", lineMouseUp: "lineMouseUp", lineRightClick: "lineRightClick", polyPathChange: "polyPathChange" }, queries: [{ propertyName: "points", predicate: AgmPolylinePoint }, { propertyName: "iconSequences", predicate: AgmPolylineIcon }], usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmPolyline_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmPolyline)(i0.ɵɵdirectiveInject(PolylineManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmPolyline, selectors: [["agm-polyline"]], contentQueries: function AgmPolyline_ContentQueries(rf, ctx, dirIndex) { if (rf & 1) {
+            i0.ɵɵcontentQuery(dirIndex, AgmPolylinePoint, 4);
+            i0.ɵɵcontentQuery(dirIndex, AgmPolylineIcon, 4);
+        } if (rf & 2) {
+            let _t;
+            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.points = _t);
+            i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.iconSequences = _t);
+        } }, inputs: { clickable: "clickable", draggable: [0, "polylineDraggable", "draggable"], editable: "editable", geodesic: "geodesic", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { lineClick: "lineClick", lineDblClick: "lineDblClick", lineDrag: "lineDrag", lineDragEnd: "lineDragEnd", lineDragStart: "lineDragStart", lineMouseDown: "lineMouseDown", lineMouseMove: "lineMouseMove", lineMouseOut: "lineMouseOut", lineMouseOver: "lineMouseOver", lineMouseUp: "lineMouseUp", lineRightClick: "lineRightClick", polyPathChange: "polyPathChange" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmPolyline, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-polyline',
-                }]
-        }], ctorParameters: () => [{ type: PolylineManager }], propDecorators: { clickable: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['polylineDraggable']
-            }], editable: [{
-                type: Input
-            }], geodesic: [{
-                type: Input
-            }], strokeColor: [{
-                type: Input
-            }], strokeOpacity: [{
-                type: Input
-            }], strokeWeight: [{
-                type: Input
-            }], visible: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], lineClick: [{
-                type: Output
-            }], lineDblClick: [{
-                type: Output
-            }], lineDrag: [{
-                type: Output
-            }], lineDragEnd: [{
-                type: Output
-            }], lineDragStart: [{
-                type: Output
-            }], lineMouseDown: [{
-                type: Output
-            }], lineMouseMove: [{
-                type: Output
-            }], lineMouseOut: [{
-                type: Output
-            }], lineMouseOver: [{
-                type: Output
-            }], lineMouseUp: [{
-                type: Output
-            }], lineRightClick: [{
-                type: Output
-            }], polyPathChange: [{
-                type: Output
-            }], points: [{
-                type: ContentChildren,
-                args: [AgmPolylinePoint]
-            }], iconSequences: [{
-                type: ContentChildren,
-                args: [AgmPolylineIcon]
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmPolyline, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-polyline',
+            }]
+    }], () => [{ type: PolylineManager }], { clickable: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['polylineDraggable']
+        }], editable: [{
+            type: Input
+        }], geodesic: [{
+            type: Input
+        }], strokeColor: [{
+            type: Input
+        }], strokeOpacity: [{
+            type: Input
+        }], strokeWeight: [{
+            type: Input
+        }], visible: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], lineClick: [{
+            type: Output
+        }], lineDblClick: [{
+            type: Output
+        }], lineDrag: [{
+            type: Output
+        }], lineDragEnd: [{
+            type: Output
+        }], lineDragStart: [{
+            type: Output
+        }], lineMouseDown: [{
+            type: Output
+        }], lineMouseMove: [{
+            type: Output
+        }], lineMouseOut: [{
+            type: Output
+        }], lineMouseOver: [{
+            type: Output
+        }], lineMouseUp: [{
+            type: Output
+        }], lineRightClick: [{
+            type: Output
+        }], polyPathChange: [{
+            type: Output
+        }], points: [{
+            type: ContentChildren,
+            args: [AgmPolylinePoint]
+        }], iconSequences: [{
+            type: ContentChildren,
+            args: [AgmPolylineIcon]
+        }] }); })();
 
 class AgmRectangle {
     static { this._mapOptions = [
@@ -3919,70 +3940,70 @@ class AgmRectangle {
     getBounds() {
         return this._manager.getBounds(this);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmRectangle, deps: [{ token: RectangleManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmRectangle, selector: "agm-rectangle", inputs: { north: "north", east: "east", south: "south", west: "west", clickable: "clickable", draggable: ["rectangleDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokePosition: "strokePosition", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { boundsChange: "boundsChange", rectangleClick: "rectangleClick", rectangleDblClick: "rectangleDblClick", drag: "drag", dragEnd: "dragEnd", dragStart: "dragStart", mouseDown: "mouseDown", mouseMove: "mouseMove", mouseOut: "mouseOut", mouseOver: "mouseOver", mouseUp: "mouseUp", rightClick: "rightClick" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmRectangle_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmRectangle)(i0.ɵɵdirectiveInject(RectangleManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmRectangle, selectors: [["agm-rectangle"]], inputs: { north: "north", east: "east", south: "south", west: "west", clickable: "clickable", draggable: [0, "rectangleDraggable", "draggable"], editable: "editable", fillColor: "fillColor", fillOpacity: "fillOpacity", strokeColor: "strokeColor", strokeOpacity: "strokeOpacity", strokePosition: "strokePosition", strokeWeight: "strokeWeight", visible: "visible", zIndex: "zIndex" }, outputs: { boundsChange: "boundsChange", rectangleClick: "rectangleClick", rectangleDblClick: "rectangleDblClick", drag: "drag", dragEnd: "dragEnd", dragStart: "dragStart", mouseDown: "mouseDown", mouseMove: "mouseMove", mouseOut: "mouseOut", mouseOver: "mouseOver", mouseUp: "mouseUp", rightClick: "rightClick" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmRectangle, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-rectangle',
-                }]
-        }], ctorParameters: () => [{ type: RectangleManager }], propDecorators: { north: [{
-                type: Input
-            }], east: [{
-                type: Input
-            }], south: [{
-                type: Input
-            }], west: [{
-                type: Input
-            }], clickable: [{
-                type: Input
-            }], draggable: [{
-                type: Input,
-                args: ['rectangleDraggable']
-            }], editable: [{
-                type: Input
-            }], fillColor: [{
-                type: Input
-            }], fillOpacity: [{
-                type: Input
-            }], strokeColor: [{
-                type: Input
-            }], strokeOpacity: [{
-                type: Input
-            }], strokePosition: [{
-                type: Input
-            }], strokeWeight: [{
-                type: Input
-            }], visible: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], boundsChange: [{
-                type: Output
-            }], rectangleClick: [{
-                type: Output
-            }], rectangleDblClick: [{
-                type: Output
-            }], drag: [{
-                type: Output
-            }], dragEnd: [{
-                type: Output
-            }], dragStart: [{
-                type: Output
-            }], mouseDown: [{
-                type: Output
-            }], mouseMove: [{
-                type: Output
-            }], mouseOut: [{
-                type: Output
-            }], mouseOver: [{
-                type: Output
-            }], mouseUp: [{
-                type: Output
-            }], rightClick: [{
-                type: Output
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmRectangle, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-rectangle',
+            }]
+    }], () => [{ type: RectangleManager }], { north: [{
+            type: Input
+        }], east: [{
+            type: Input
+        }], south: [{
+            type: Input
+        }], west: [{
+            type: Input
+        }], clickable: [{
+            type: Input
+        }], draggable: [{
+            type: Input,
+            args: ['rectangleDraggable']
+        }], editable: [{
+            type: Input
+        }], fillColor: [{
+            type: Input
+        }], fillOpacity: [{
+            type: Input
+        }], strokeColor: [{
+            type: Input
+        }], strokeOpacity: [{
+            type: Input
+        }], strokePosition: [{
+            type: Input
+        }], strokeWeight: [{
+            type: Input
+        }], visible: [{
+            type: Input
+        }], zIndex: [{
+            type: Input
+        }], boundsChange: [{
+            type: Output
+        }], rectangleClick: [{
+            type: Output
+        }], rectangleDblClick: [{
+            type: Output
+        }], drag: [{
+            type: Output
+        }], dragEnd: [{
+            type: Output
+        }], dragStart: [{
+            type: Output
+        }], mouseDown: [{
+            type: Output
+        }], mouseMove: [{
+            type: Output
+        }], mouseOut: [{
+            type: Output
+        }], mouseOver: [{
+            type: Output
+        }], mouseUp: [{
+            type: Output
+        }], rightClick: [{
+            type: Output
+        }] }); })();
 
 let layerId = 0;
 /*
@@ -4022,17 +4043,17 @@ class AgmTransitLayer {
     ngOnDestroy() {
         this._manager.deleteLayer(this);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmTransitLayer, deps: [{ token: LayerManager }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: AgmTransitLayer, selector: "agm-transit-layer", inputs: { visible: "visible" }, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = function AgmTransitLayer_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmTransitLayer)(i0.ɵɵdirectiveInject(LayerManager)); }; }
+    static { this.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: AgmTransitLayer, selectors: [["agm-transit-layer"]], inputs: { visible: "visible" }, features: [i0.ɵɵNgOnChangesFeature] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmTransitLayer, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'agm-transit-layer',
-                }]
-        }], ctorParameters: () => [{ type: LayerManager }], propDecorators: { visible: [{
-                type: Input
-            }] } });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmTransitLayer, [{
+        type: Directive,
+        args: [{
+                selector: 'agm-transit-layer',
+            }]
+    }], () => [{ type: LayerManager }], { visible: [{
+            type: Input
+        }] }); })();
 
 /**
  * @internal
@@ -4072,40 +4093,41 @@ class AgmCoreModule {
             ],
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmCoreModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: AgmCoreModule, declarations: [AgmBicyclingLayer,
-            AgmCircle,
-            AgmDataLayer,
-            AgmFitBounds,
-            AgmInfoWindow,
-            AgmKmlLayer,
-            AgmMap,
-            AgmMarker,
-            AgmPolygon,
-            AgmPolyline,
-            AgmPolylineIcon,
-            AgmPolylinePoint,
-            AgmRectangle,
-            AgmTransitLayer], exports: [AgmBicyclingLayer,
-            AgmCircle,
-            AgmDataLayer,
-            AgmFitBounds,
-            AgmInfoWindow,
-            AgmKmlLayer,
-            AgmMap,
-            AgmMarker,
-            AgmPolygon,
-            AgmPolyline,
-            AgmPolylineIcon,
-            AgmPolylinePoint,
-            AgmRectangle,
-            AgmTransitLayer] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmCoreModule }); }
+    static { this.ɵfac = function AgmCoreModule_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || AgmCoreModule)(); }; }
+    static { this.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: AgmCoreModule }); }
+    static { this.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({}); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AgmCoreModule, decorators: [{
-            type: NgModule,
-            args: [{ declarations: coreDirectives(), exports: coreDirectives() }]
-        }] });
+(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgmCoreModule, [{
+        type: NgModule,
+        args: [{ declarations: coreDirectives(), exports: coreDirectives() }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AgmCoreModule, { declarations: [AgmBicyclingLayer,
+        AgmCircle,
+        AgmDataLayer,
+        AgmFitBounds,
+        AgmInfoWindow,
+        AgmKmlLayer,
+        AgmMap,
+        AgmMarker,
+        AgmPolygon,
+        AgmPolyline,
+        AgmPolylineIcon,
+        AgmPolylinePoint,
+        AgmRectangle,
+        AgmTransitLayer], exports: [AgmBicyclingLayer,
+        AgmCircle,
+        AgmDataLayer,
+        AgmFitBounds,
+        AgmInfoWindow,
+        AgmKmlLayer,
+        AgmMap,
+        AgmMarker,
+        AgmPolygon,
+        AgmPolyline,
+        AgmPolylineIcon,
+        AgmPolylinePoint,
+        AgmRectangle,
+        AgmTransitLayer] }); })();
 
 /*
  * Public API Surface of core

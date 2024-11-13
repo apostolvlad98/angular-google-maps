@@ -24,3 +24,4 @@ export declare class RectangleManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<RectangleManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<RectangleManager>;
 }
+//# sourceMappingURL=rectangle-manager.d.ts.map

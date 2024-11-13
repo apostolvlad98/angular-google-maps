@@ -154,3 +154,4 @@ export interface PathEvent {
     index: number;
     previous?: LatLng;
 }
+//# sourceMappingURL=polyline.d.ts.map

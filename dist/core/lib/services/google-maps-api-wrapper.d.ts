@@ -74,3 +74,4 @@ export declare class GoogleMapsAPIWrapper {
     static ɵfac: i0.ɵɵFactoryDeclaration<GoogleMapsAPIWrapper, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<GoogleMapsAPIWrapper>;
 }
+//# sourceMappingURL=google-maps-api-wrapper.d.ts.map

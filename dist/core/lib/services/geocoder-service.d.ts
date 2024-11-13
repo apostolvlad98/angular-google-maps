@@ -11,3 +11,4 @@ export declare class AgmGeocoder {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmGeocoder, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<AgmGeocoder>;
 }
+//# sourceMappingURL=geocoder-service.d.ts.map

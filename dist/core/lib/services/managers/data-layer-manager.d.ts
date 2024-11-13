@@ -32,3 +32,4 @@ export declare class DataLayerManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<DataLayerManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DataLayerManager>;
 }
+//# sourceMappingURL=data-layer-manager.d.ts.map

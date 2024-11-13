@@ -21,3 +21,4 @@ export declare class AgmTransitLayer implements OnInit, OnChanges, OnDestroy {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmTransitLayer, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmTransitLayer, "agm-transit-layer", never, { "visible": { "alias": "visible"; "required": false; }; }, {}, never, never, false, never>;
 }
+//# sourceMappingURL=transit-layer.d.ts.map

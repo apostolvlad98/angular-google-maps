@@ -63,3 +63,4 @@ export declare class AgmKmlLayer implements OnInit, OnDestroy, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmKmlLayer, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmKmlLayer, "agm-kml-layer", never, { "clickable": { "alias": "clickable"; "required": false; }; "preserveViewport": { "alias": "preserveViewport"; "required": false; }; "screenOverlays": { "alias": "screenOverlays"; "required": false; }; "suppressInfoWindows": { "alias": "suppressInfoWindows"; "required": false; }; "url": { "alias": "url"; "required": false; }; "zIndex": { "alias": "zIndex"; "required": false; }; }, { "layerClick": "layerClick"; "defaultViewportChange": "defaultViewportChange"; "statusChange": "statusChange"; }, never, never, false, never>;
 }
+//# sourceMappingURL=kml-layer.d.ts.map

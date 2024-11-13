@@ -33,3 +33,4 @@ export declare class FitBoundsService {
     static ɵfac: i0.ɵɵFactoryDeclaration<FitBoundsService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<FitBoundsService>;
 }
+//# sourceMappingURL=fit-bounds.d.ts.map

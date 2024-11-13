@@ -104,3 +104,4 @@ export declare class AgmInfoWindow implements OnDestroy, OnChanges, OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmInfoWindow, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<AgmInfoWindow, "agm-info-window", never, { "latitude": { "alias": "latitude"; "required": false; }; "longitude": { "alias": "longitude"; "required": false; }; "disableAutoPan": { "alias": "disableAutoPan"; "required": false; }; "zIndex": { "alias": "zIndex"; "required": false; }; "maxWidth": { "alias": "maxWidth"; "required": false; }; "isOpen": { "alias": "isOpen"; "required": false; }; }, { "infoWindowClose": "infoWindowClose"; }, never, ["*"], false, never>;
 }
+//# sourceMappingURL=info-window.d.ts.map

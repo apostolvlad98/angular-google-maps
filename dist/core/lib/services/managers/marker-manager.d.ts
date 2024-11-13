@@ -27,3 +27,4 @@ export declare class MarkerManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<MarkerManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MarkerManager>;
 }
+//# sourceMappingURL=marker-manager.d.ts.map

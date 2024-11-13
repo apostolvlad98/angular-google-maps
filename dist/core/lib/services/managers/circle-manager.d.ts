@@ -28,3 +28,4 @@ export declare class CircleManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<CircleManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<CircleManager>;
 }
+//# sourceMappingURL=circle-manager.d.ts.map

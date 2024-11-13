@@ -25,3 +25,4 @@ export declare class KmlLayerManager {
     static ɵfac: i0.ɵɵFactoryDeclaration<KmlLayerManager, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<KmlLayerManager>;
 }
+//# sourceMappingURL=kml-layer-manager.d.ts.map

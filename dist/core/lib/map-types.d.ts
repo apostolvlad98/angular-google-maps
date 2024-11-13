@@ -7,3 +7,4 @@ export interface MouseEvent {
     coords: LatLngLiteral;
     placeId?: string;
 }
+//# sourceMappingURL=map-types.d.ts.map

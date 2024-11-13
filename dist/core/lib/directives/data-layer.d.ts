@@ -224,3 +224,4 @@ export declare class AgmDataLayer implements OnInit, OnDestroy, OnChanges {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgmDataLayer, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<AgmDataLayer, "agm-data-layer", never, { "geoJson": { "alias": "geoJson"; "required": false; }; "style": { "alias": "style"; "required": false; }; }, { "layerClick": "layerClick"; }, never, never, false, never>;
 }
+//# sourceMappingURL=data-layer.d.ts.map
